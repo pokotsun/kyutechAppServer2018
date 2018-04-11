@@ -3,8 +3,8 @@ from django.core.management.base import BaseCommand, CommandError
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
 
-from api.management.commands import aiueo
-import os
+#from api.management.commands import aiueo
+#import os
 
 class Command(BaseCommand):
 

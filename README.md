@@ -9,3 +9,4 @@
     - django-filter==1.1.0
     - djangorestframework==3.8.0
     - pytz==2018.3
+    
