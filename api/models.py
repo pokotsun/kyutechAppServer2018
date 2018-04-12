@@ -22,11 +22,11 @@ class News(models.Model):
     class Meta:
         verbose_name_plural = 'News'
 
-    news_code = models.IntegerField() 
     news_heading = models.ForeignKey(NewsHeading, on_delete=models.CASCADE)
     infos = models.CharField(max_length=10000)
-    attachement_titles = models.CharField(max_length=10000)
-    attachement_urls = models.CharField(max_length=10000)
+    attachement_titles = models.CharField(max_length=10000, null=True)
+    attachement_urls = models.CharField(max_length=10000, null=True)
+    url_params = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

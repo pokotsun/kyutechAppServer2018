@@ -21,3 +21,18 @@ NEWS_HEADING_INFOS = [
     {"short_name": "学", "name":"学部生情報", "news_heading_code": 368, "color_code": "#AA1F19"},
     {"short_name": "院", "name":"大学院生情報", "news_heading_code": 370, "color_code": "#FF69B4"},
 ]
+
+NEWS_INIT_INFOS = [
+    {"news_heading_code": 357, "url": "db.cgi?page=DBRecord&did=357&qid=all&vid=24&rid=7&Head=33&hid=247&sid=n&rev=0&ssid=1-794-15679-g90"},
+    {"news_heading_code": 391, "url": "db.cgi?page=DBRecord&did=391&qid=all&vid=24&rid=4&Head=24&hid=265&sid=n&rev=0&ssid=1-845-15710-g90"},
+    {"news_heading_code": 361, "url": ""},
+    {"news_heading_code": 363, "url": ""},
+    {"news_heading_code": 393, "url": ""},
+    {"news_heading_code": 364, "url": ""},
+    {"news_heading_code": 373, "url": ""},
+    {"news_heading_code": 367, "url": ""},
+    {"news_heading_code": 379, "url": ""},
+    {"news_heading_code": 372, "url": ""},
+    {"news_heading_code": 368, "url": ""},
+    {"news_heading_code": 370, "url": ""},
+]
