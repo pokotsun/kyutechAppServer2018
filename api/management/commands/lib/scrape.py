@@ -20,7 +20,7 @@ def go_to_next_news(news, news_column_count):
     if next_url_params is not None:
         sleep(0.5)
         return scrape_news(next_url_params,
-            news_column_count, news.news_heading.news_heading_code)            
+            news_column_count, news.news_heading.news _heading_code)            
     else: # Newsが最新の状態のためここでログを書いておく
         print(f"最新のニュースです")
         return None
@@ -89,11 +89,6 @@ def scrape_news(news_url_params, news_column_count, news_heading_code):
     attachement_titles = remove_last_yoke(attachement_titles)
     attachement_urls = remove_last_yoke(attachement_urls)
 
-    print(f"info_text: {info_text}")
-    print(f"attachement_titles: {attachement_titles}")
-    print(f"attachement_urls: {attachement_urls}")
-
-    print(f"info_split: {info_text.split(YOKE_CODE)}")
     return News(
     news_heading = NewsHeading.objects.get(
     news_heading_code=news_heading_code),

@@ -2,7 +2,7 @@
 # スクレイピングで BASEとなるURL
 SCRAPE_BASE_URL = "https://db.jimu.kyutech.ac.jp/cgi-bin/cbdb/" 
 
-# 文を区切るときに使う文字
+# 文を区切るときに使う文字列
 YOKE_CODE = "|%&%|"
 
 # 初期化時に使う定数群
@@ -22,6 +22,7 @@ NEWS_HEADING_INFOS = [
     {"short_name": "院", "name":"大学院生情報", "news_heading_code": 370, "color_code": "#FF69B4"},
 ]
 
+# Newsの初期処理時につかう
 NEWS_INIT_INFOS = [
     {"news_heading_code": 357, "url": "db.cgi?page=DBRecord&did=357&qid=all&vid=24&rid=7&Head=33&hid=247&sid=n&rev=0&ssid=1-794-15679-g90"},
     {"news_heading_code": 391, "url": "db.cgi?page=DBRecord&did=391&qid=all&vid=24&rid=4&Head=24&hid=265&sid=n&rev=0&ssid=1-845-15710-g90"},
