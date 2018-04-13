@@ -7,4 +7,9 @@ from ..models import NewsHeading
 class NewsHeadingSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsHeading
-        fields = ('short_name', 'name')
+        fields = (
+        'news_heading_code',
+        'short_name', 
+        'name',
+        'color_code',
+        'updated_at')

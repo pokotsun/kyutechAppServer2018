@@ -13,7 +13,7 @@ class NewsAdmin(admin.ModelAdmin):
 
 # NewsHeadingの表示
 class NewsHeadingAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'short_name', 'news_heading_code', 'color_code')
+    list_display = ('pk', 'name', 'short_name', 'news_heading_code', 'color_code', 'updated_at')
 
     fieldsets = [ 
         (None, {'fields': ['name', 'news_heading_code', 'color_code']}),
