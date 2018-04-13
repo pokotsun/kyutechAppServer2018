@@ -15,7 +15,7 @@ NEWS_HEADING_INFOS = [
         "color_code": "#219653",
         "fields": ["タイトル", "日付", "時限等", "場所", "内容", "対象学科", "対象学年"],
         "attachement_num": 5,
-        "init_url": "db.cgi?page=dbrecord&did=357&qid=all&vid=24&rid=7&head=33&hid=247&sid=n&rev=0&ssid=1-794-15679-g90"
+        "init_url": "db.cgi?page=DBRecord&did=357&qid=all&vid=24&rid=7&sid=n&fvid=136#dz_navigation",
     },
     {
         "short_name": "変", 
@@ -24,7 +24,7 @@ NEWS_HEADING_INFOS = [
         "color_code": "##6495ED",
         "fields": ["タイトル", "科目名", "教員名", "対象学科", "対象学年", "日付", "時限", "種別", "変更前", "変更後", "内容"],
         "attachement_num": 0,
-        "init_url": "db.cgi?page=dbrecord&did=391&qid=all&vid=24&rid=4&head=24&hid=265&sid=n&rev=0&ssid=1-845-15710-g90"
+        "init_url": "db.cgi?page=DBRecord&did=391&qid=all&vid=24&rid=4&Head=24&hid=265&sid=n&rev=0&ssid=3-2042-7255-g72"
     },
     {
         "short_name": "休", 

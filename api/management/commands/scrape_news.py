@@ -12,5 +12,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         sys.setrecursionlimit(10000)
 
-        scrape_news("db.cgi?page=DBRecord&did=357&qid=all&vid=24&rid=7&sid=n&fvid=136#dz_navigation", 12, 357)
+        scrape_news("db.cgi?page=DBRecord&did=357&qid=all&vid=24&rid=7&sid=n&fvid=136#dz_navigation", 357)
 
