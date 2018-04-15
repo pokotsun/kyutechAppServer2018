@@ -43,6 +43,8 @@ class News(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"news_heading: {self.news_heading}\nurl_params: {self.url_params}"
     # 各種モデル上のInfoをデコードする関数
     def decode_infos(self):
         return self.infos.split(YOKE_CODE)

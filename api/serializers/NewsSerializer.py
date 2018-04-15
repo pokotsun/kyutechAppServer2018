@@ -29,7 +29,7 @@ class NewsSerializer(serializers.ModelSerializer):
         attachement_titles = obj.decode_attachement_titles()
         attachement_urls = obj.decode_attachement_urls()
 
-        print(f"attachement_infos: {attachement_titles} : {attachement_urls}")
+        #print(f"attachement_infos: {attachement_titles} : {attachement_urls}")
         rtn = {} #初期化
         #for i in range(attachement_count):        
         for (field_name, title, url) in zip(field_names, attachement_titles, attachement_urls):

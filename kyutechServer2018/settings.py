@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'rest_framework',
     'django_filters',
     'api.apps.ApiConfig',
@@ -123,5 +124,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'DATETIME_FORMAT': "%Y/%m/%d %H:%M"
+    'DATETIME_FORMAT': "%Y/%m/%d %H:%M",
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }
