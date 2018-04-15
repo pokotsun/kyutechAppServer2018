@@ -12,6 +12,7 @@ router.register(r'news-headings', NewsHeadingViewSet)
 #router.register(r'news', NewsViewSet)
 
 urlpatterns = [
-    path(r'news/code:<int:code>', FilteredNewsViewSet.as_view()),
+    #path(r'news/code:<int:code>', FilteredNewsViewSet.as_view()),
+    path(r'news/code-<int:code>/', FilteredNewsViewSet.as_view()),
 ]
 

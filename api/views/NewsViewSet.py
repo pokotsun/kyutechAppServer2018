@@ -10,11 +10,12 @@ class NewsViewSet(viewsets.ModelViewSet):
 
 
 class FilteredNewsViewSet(generics.ListAPIView):
-    #filter_fields = ('pk','news_heading')
     serializer_class = NewsSerializer
 
     def get_queryset(self):
         news_heading_code = self.kwargs['code']
+        # これでusernameパラムとして取得できる
+        #print(f"ゆーざーねーむ: {self.request.query_params.get('username', None)}")
         if news_heading_code is not None:
             return News.objects.filter(news_heading__news_heading_code__contains=news_heading_code)
         else: 
