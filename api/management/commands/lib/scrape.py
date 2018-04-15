@@ -22,7 +22,6 @@ def go_to_next_news(news):
         return scrape_news(next_url_params,
             news.news_heading.news_heading_code)            
     else: # Newsが最新の状態のためここでログを書いておく
-        print(f"最新のニュースです")
         return None
 
 # スクレイピング先のURLからsoupを取得する
@@ -83,13 +82,9 @@ def scrape_news(news_url_params, news_heading_code):
                 print(f"{field_name} : {tt.string}")
         elif info_tag.a is not None:
             a = info_tag.a
-            if a.string is not None:
-                attachement_titles += a.string
-                attachement_urls += a.get('href')
-                print(f"{field_name} : title: {a.string}\nhref: {a.get('href')}")
-            else:
-                attachement_titles += YOKE_CODE 
-                attachement_urls += YOKE_CODE 
+            attachement_titles += f"{a.string}{YOKE_CODE}"
+            attachement_urls += f"{a.get('href')}{YOKE_CODE}"
+            print(f"{field_name} : title: {a.string}\nhref: {a.get('href')}")
         elif info_tag.string is not None: 
             info_text += info_tag.string 
             print(f"{field_name} : {info_tag.string}")
