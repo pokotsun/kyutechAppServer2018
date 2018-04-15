@@ -1,7 +1,9 @@
 # -- coding: utf-8 --
 from django.core.management.base import BaseCommand, CommandError
 from api.management.commands.lib.scrape import scrape_news
+from api.models import NewsHeading, News
 import sys
+from api.management.commands.lib.scrape import go_to_next_news
 
 class Command(BaseCommand):
 
@@ -10,7 +12,15 @@ class Command(BaseCommand):
 
     # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
-        sys.setrecursionlimit(10000)
+        news_headings = NewsHeading.objects.all()
 
-        scrape_news("db.cgi?page=DBRecord&did=357&qid=all&vid=24&rid=7&sid=n&fvid=136#dz_navigation", 357)
+        for news_heading in news_headings:
+            news = News.get_most_recent_filtered_news(news_heading.news_heading_code)
+            while news is not None:
+                news = go_to_next_news(news)
+                if news is not None:
+                    news.save()
+                else:
+                    print(f"{news_heading.name}は最新の状態に更新されました!")
+                    break
 

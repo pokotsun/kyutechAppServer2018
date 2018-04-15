@@ -45,6 +45,15 @@ class News(models.Model):
 
     def __str__(self):
         return f"news_heading: {self.news_heading}\nurl_params: {self.url_params}"
+
+
+    # あるNewsHeadingに属するものだけ取得
+    def filter_by_news_heading_code(news_heading_code):
+        return News.objects.filter(news_heading__news_heading_code__contains=news_heading_code)
+    
+    def get_most_recent_filtered_news(news_heading_code):
+        return News.filter_by_news_heading_code(news_heading_code).reverse().first()
+        
     # 各種モデル上のInfoをデコードする関数
     def decode_infos(self):
         return self.infos.split(YOKE_CODE)
