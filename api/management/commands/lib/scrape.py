@@ -59,13 +59,17 @@ def scrape_news(news_url_params, news_heading_code):
     info_tags = soup.find_all(class_=re.compile(r"record-value-[0-9]+"))
     
     # 初期化
-    info_text = attachement_titles = attachement_urls = ""
+    info_text = ""
+    attachement_titles = ""
+    attachement_urls = ""
     
     news_column_count = news_heading.field_count()    
     field_names = news_heading.decode_field_names()
-
+    field_names.extend(news_heading.get_attachement_field_names())
+    
     print(f"{len(info_tags)}, {news_column_count}")
     #if len(info_tags) == news_column_count:
+    print(f"フィールドネーム: {field_names}")
     for (field_name, info_tag) in zip(field_names, info_tags):
         #field_name = f"{field_tag.string}"
         tt = info_tag.tt
@@ -79,10 +83,13 @@ def scrape_news(news_url_params, news_heading_code):
                 print(f"{field_name} : {tt.string}")
         elif info_tag.a is not None:
             a = info_tag.a
-            #info_text += a.string + YOKE_CODE + a.get('href') 
-            attachement_titles += f"{a.string}{YOKE_CODE}"
-            attachement_urls += f"{a.get('href')}{YOKE_CODE}"
-            print(f"{field_name} : title: {a.string}\nhref: {a.get('href')}")
+            if a.string is not None:
+                attachement_titles += a.string
+                attachement_urls += a.get('href')
+                print(f"{field_name} : title: {a.string}\nhref: {a.get('href')}")
+            else:
+                attachement_titles += YOKE_CODE 
+                attachement_urls += YOKE_CODE 
         elif info_tag.string is not None: 
             info_text += info_tag.string 
             print(f"{field_name} : {info_tag.string}")
@@ -91,12 +98,12 @@ def scrape_news(news_url_params, news_heading_code):
             print(f"{field_name} : {info_tag.string}")
 
         info_text += YOKE_CODE 
-
+    
     info_text = remove_last_yoke(info_text)
     attachement_titles = remove_last_yoke(attachement_titles)
     attachement_urls = remove_last_yoke(attachement_urls)
 
-    print(f"{info_text}\n\n{attachement_titles}\n\n{attachement_urls}")
+    print(f"info_text: {info_text}\n\natache_titles: {attachement_titles}\n\nattache_urls: {attachement_urls}")
     return News(
     news_heading = news_heading,
     infos=info_text,

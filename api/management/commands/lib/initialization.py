@@ -19,6 +19,15 @@ def initialize_news_heading():
 def initialize_news():
     news_init_infos = NEWS_HEADING_INFOS
 
+    #info = news_init_infos[0]
+    #news = scrape_news(info["init_url"], info["news_heading_code"])
+    #news.save()
+    #while(news is not None):
+    #    news = go_to_next_news(news)
+    #    if news is not None:
+    #        news.save()
+    #print("newsの取得に成功しました")
+    
     for info in news_init_infos:
         news = scrape_news(info["init_url"], info["news_heading_code"])
         if news is not None: 
@@ -28,7 +37,3 @@ def initialize_news():
             news = go_to_next_news(news)
             if news is not None:
                 news.save()
-
-    print("newsの取得に成功しました")
-     
-

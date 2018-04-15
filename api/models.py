@@ -27,6 +27,9 @@ class NewsHeading(models.Model):
     def decode_field_names(self):
          return self.field_names.split(YOKE_CODE)
 
+    def get_attachement_field_names(self):
+        return [f"添付資料({x+1})" for x in range(self.attachement_count)]
+
 # Newsモデル
 class News(models.Model):
     class Meta:
@@ -40,3 +43,12 @@ class News(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def decode_infos(self):
+        return self.infos.split(YOKE_CODE)
+
+    def decode_attachement_titles(self):
+        return self.attachement_titles.split(YOKE_CODE)
+
+    def decode_attachement_urls(self):
+        return self.attachement_urls.split(YOKE_CODE)
+    
