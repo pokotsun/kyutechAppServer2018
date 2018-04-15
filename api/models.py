@@ -43,6 +43,7 @@ class News(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # 各種モデル上のInfoをデコードする関数
     def decode_infos(self):
         return self.infos.split(YOKE_CODE)
 
@@ -52,3 +53,10 @@ class News(models.Model):
     def decode_attachement_urls(self):
         return self.attachement_urls.split(YOKE_CODE)
     
+    # saveのオーバーライド
+    # Newsがsaveされた場合そのNewsの親となるNewsHeadingのupdated_atを更新させたいから
+    def save(self):
+        super().save()
+        self.news_heading.save()
+        
+

@@ -26,15 +26,13 @@ def go_to_next_news(news):
 
 # スクレイピング先のURLからsoupを取得する
 def get_soup(url):
-    # アクセスするURL
     try: 
         html = urllib.request.urlopen(url)
     except urllib.error.HTTPError:
         print("404Not Found Errorの発生")
         return None
     else: 
-        # htmlをBeautifulSoupで返す
-        return BeautifulSoup(html, "html.parser")
+        return BeautifulSoup(html, "html.parser") # htmlをBeautifulSoupで返す
 
 # 文字列の最後のYOKE_CODEだけ消す
 def remove_last_yoke(txt):
@@ -94,6 +92,7 @@ def scrape_news(news_url_params, news_heading_code):
 
         info_text += YOKE_CODE 
     
+    # 各種テキストの末尾のYOKE_CODEを取り除く
     info_text = remove_last_yoke(info_text)
     attachement_titles = remove_last_yoke(attachement_titles)
     attachement_urls = remove_last_yoke(attachement_urls)
@@ -105,5 +104,3 @@ def scrape_news(news_url_params, news_heading_code):
     attachement_titles=attachement_titles,
     attachement_urls=attachement_urls,
     url_params=news_url_params)
-    #else:
-    #    print("情報の数とフィールドの数が合いません")
