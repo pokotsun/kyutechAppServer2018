@@ -1,6 +1,8 @@
 beautifulsoup4==4.6.0
 Django==2.0.4
+django-extensions==2.0.6
 django-filter==1.1.0
 djangorestframework==3.8.0
 pytz==2018.3
 selenium==3.11.0
+six==1.11.0
