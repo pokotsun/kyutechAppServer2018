@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 import re
+from api.models import syllabus
 
 # htmlの状態をシラバスが取れる状態までする
 def initialize_html_state():
@@ -25,9 +26,9 @@ def initialize_html_state():
 
     driver.find_element_by_class_name('js-simple-search-btn').click() # 検索ボタンをクリック
     sleep(5) # 検索ボタン結果が反映されるまで待つ
-    
+
     return driver
-    
+
 # seleniumドライバーからsoupを取得する
 def get_soup(driver):
     data = driver.page_source.encode('utf-8')
@@ -35,16 +36,19 @@ def get_soup(driver):
 
 # シラバスの情報を取っていく
 def scrape_syllabus(soup):
-    subject_title = soup.find(class_="syllabus__subject-name")    
+
+    syllabus = syllabus() # モデルの初期化
+    subject_title = soup.find(class_="syllabus__subject-name")
+    syllabus.subject_title = subject_title
     print(f"教科名: {subject_title.string}")
 
     subject_content = subject_title.parent.next_sibling
     while subject_content is not None:
         print(f"{subject_content.string}")
-        #result = re.sub(r'【*】', '', subject_content.string)
-        result = ','.join(filter(lambda str:str != '', subject_content.string.split(' ')[1:]))
+        label = subject_content[0]
+        value = ','.join(filter(lambda str:str != '', subject_content.string.split(' ')[1:]))
         print(f"items: {result}")
-        subject_content = subject_content.next_sibling                
+        subject_content = subject_content.next_sibling
     print("\n")
 
     # コンテンツ情報を取得していく
@@ -61,4 +65,3 @@ def scrape_syllabus(soup):
     print("\n******************************\n")
     #print(soup.title)
     #driver.save_screenshot(f"test{i}.png")
-
