@@ -48,7 +48,9 @@ def scrape_syllabus(soup):
         label = subject_content[0]
         value = ','.join(filter(lambda str:str != '', subject_content.string.split(' ')[1:]))
         print(f"items: {result}")
-        subject_content = subject_content.next_sibling
+        syllabus.set_model_section_attribute(label, value) # 属性のセット
+
+        subject_content = subject_content.next_sibling # 次のエレメントをセット
     print("\n")
 
     # コンテンツ情報を取得していく
