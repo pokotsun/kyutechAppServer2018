@@ -34,6 +34,7 @@ def get_soup(url):
     else: 
         return BeautifulSoup(html, "html.parser") # htmlをBeautifulSoupで返す
 
+
 # 文字列の最後のYOKE_CODEだけ消す
 def remove_last_yoke(txt):
    return txt[:len(txt) - len(YOKE_CODE)] 
