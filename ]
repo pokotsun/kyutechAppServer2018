@@ -43,26 +43,18 @@ class Command(BaseCommand):
                 data = driver.page_source.encode('utf-8')
                 soup = BeautifulSoup(data, "html.parser")
                 
-                # シラバスの情報を取っていく
-                subject_name = soup.find(class_="syllabus__subject-name")
-                print(f"教科名: {subject_name.string}")
-
-                subject_content = subject_name.parent.next_sibling
-                while subject_content is not None:
-                    print(f"{subject_content.string}")
-                    subject_content = subject_content.next_sibling                
-                print("\n")
-
+                syllabus_section_titles = soup.find_all(class_=re.compile(r"syllabus__section__title"))
                 # コンテンツ情報を取得していく
-                section_titles = soup.find_all(class_=re.compile(r"syllabus__section__title"))
-                for section_title in section_titles:
-                    section_content = section_title.next_sibling
-                    #print(f"{section_title.string}: {syllabus_section_content.get_text()}")
+                for syllabus_section_title in syllabus_section_titles:
+                    syllabus_section_content = syllabus_section_title.next_sibling
+                    print(f"{syllabus_section_title.string}: {syllabus_section_content.get_text()}")
 
-                    if section_content.string is not None:
-                        print(f"{section_title.string}: {section_content.string}")
-                    else: #中に入れ子でタグを持っている場合
-                        print(f"{section_title.string}: {section_content.get_text()}")
+                    #if syllabus_section_content.string is not None:
+                    #    print(f"{syllabus_section_title.string}: {syllabus_section_content.string}")
+                    #elif syllabus_section_content.strings is not None:
+                    #    print(f"{syllabus_section_title.string}: {syllabus_section_content.string}")
+                    #else:
+                    #    print(f"{syllabus_section_title.string}: {syllabus_section_content}")
 
                 print("\n******************************\n")
                     
