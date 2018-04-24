@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from api.management.commands.lib.selenium_scrape import initialize_html_state, get_soup, scrape_syllabus
 import re
+import random
 
 class Command(BaseCommand):
 
@@ -21,12 +22,8 @@ class Command(BaseCommand):
         syllubuse_links = driver.find_elements_by_class_name('js-syllabus-show-link')
 
         for (i, link) in enumerate(syllubuse_links):
-            if i < 5:
-                link.click() # linkを呼び出す
-                sleep(5)
-
-                soup = get_soup(driver)
-                scrape_syllabus(soup)
-            else:
-                break
+            link.click() # linkを呼び出す
+            sleep(5)
+            soup = get_soup(driver)
+            scrape_syllabus(soup)
         driver.quit()

@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 import re
-from api.models import syllabus
+from api.models import Syllabus
 
 # htmlの状態をシラバスが取れる状態までする
 def initialize_html_state():
@@ -37,18 +37,23 @@ def get_soup(driver):
 # シラバスの情報を取っていく
 def scrape_syllabus(soup):
 
-    syllabus = syllabus() # モデルの初期化
+    syllabus = Syllabus() # モデルの初期化
     subject_title = soup.find(class_="syllabus__subject-name")
-    syllabus.subject_title = subject_title
+    syllabus.set_title(subject_title.string)
     print(f"教科名: {subject_title.string}")
 
     subject_content = subject_title.parent.next_sibling
     while subject_content is not None:
         print(f"{subject_content.string}")
-        label = subject_content[0]
-        value = ','.join(filter(lambda str:str != '', subject_content.string.split(' ')[1:]))
-        print(f"items: {result}")
-        syllabus.set_model_section_attribute(label, value) # 属性のセット
+        attr_infos = subject_content.string.split(' ')
+        if len(attr_infos) > 1:
+            label = attr_infos[0]
+            value = ','.join(filter(lambda str:str != '', attr_infos[1:]))
+        else:
+            attr_infos = attr_infos[0].split("】")
+            label, value = attr_infos[0], attr_infos[1]
+        print(f"label: {label}, value: {value}, count: {len(attr_infos)}")
+        syllabus.set_model_attribute(label, value) # 属性のセット
 
         subject_content = subject_content.next_sibling # 次のエレメントをセット
     print("\n")
@@ -60,10 +65,14 @@ def scrape_syllabus(soup):
         # print(f"{section_title.string}: {syllabus_section_content.get_text()}")
 
         if section_content.string is not None:
-            print(f"{section_title.string}: {section_content.string}")
+            print(f" is not None {section_title.string}: {section_content.string}\n")
+            syllabus.set_model_attribute(section_title.string, section_content.string) # 属性のセット
         else: #中に入れ子でタグを持っている場合
-            print(f"{section_title.string}: {section_content.get_text()}")
+            print(f"{section_title.string}: {section_content.get_text()}\n")
+            syllabus.set_model_attribute(section_title.string, section_content.get_text()) # 属性のセット
 
+    print(f"\nmodel_infos: {syllabus}\n")
+    # syllabus.save()
     print("\n******************************\n")
     #print(soup.title)
     #driver.save_screenshot(f"test{i}.png")

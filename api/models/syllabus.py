@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import re
 
 
 class Syllabus(models.Model):
@@ -7,7 +8,7 @@ class Syllabus(models.Model):
         verbose_name_plural = 'Syllabus'
 
     title = models.CharField(max_length=100)
-    subject_code = models.IntegerField(unique=True)
+    subject_code = models.IntegerField()
     teacher_name = models.CharField(max_length=50)
     target_participants = models.CharField(max_length=300, null=True)
     academic_credit = models.CharField(max_length=100, null=True)
@@ -36,9 +37,15 @@ class Syllabus(models.Model):
     def __str__(self):
         return f"Syllabus: {self.title}\nteacher_name: {self.teacher_name}"
 
+    # タイトルをsetする
+    def set_title(self, title):
+        self.title = title
 
-    # 各属性をセットする なんとか綺麗にしたい
+    # TODO ここのコードなんとか綺麗にしたい
+    # 各属性をセットする
     def set_model_attribute(self, label, value):
+        label = re.sub(r'[【】]', "", label)
+
         if label in "【科目コード】":
             self.subject_code = int(value)
         elif label in "【担当教員】":
@@ -60,13 +67,13 @@ class Syllabus(models.Model):
         elif label in "【講義室】":
             self.target_place = value
         elif label in "【更新日】":
-            date_info = value.split(",")[0].split("/")
+            date_info = list(map(lambda x: int(x), value.split(",")[0].split("/")))
             self.published_date = datetime(
                 date_info[0], date_info[1], date_info[2]
             )
         elif label in "授業の概要":
             self.abstract = value
-        elif label in "カリキュラムにおけるこの授業の位置付け":
+        elif label in "カリキュラムにおけるこの授業の位置付け" or label in "カリキュラムにおけるこの授業の位置づけ":
             self.positioning = value
         elif label in "授業項目":
             self.lecture_content = value
@@ -90,3 +97,4 @@ class Syllabus(models.Model):
             self.professor_email = value
         else:
             print(f"{label}は指定のラベルではありません。\n value: {value}")
+            raise ValueError
