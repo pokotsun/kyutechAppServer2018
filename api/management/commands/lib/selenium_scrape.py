@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import re
 from api.models import Syllabus
 
-# htmlの状態をシラバスが取れる状態までする
+# htmlの状態をシラバスが取れる状態までする ドライバーを返す
 def initialize_html_state():
     options = Options()
     options.add_argument('--headless')

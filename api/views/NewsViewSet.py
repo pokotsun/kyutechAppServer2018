@@ -20,6 +20,5 @@ class FilteredNewsViewSet(generics.ListAPIView):
         # NewHeadingコードの存在確認
         if news_heading_code is not None:
             return News.filter_by_news_heading_code(news_heading_code)
-        else: 
-            return None 
-            
+        else:
+            return None

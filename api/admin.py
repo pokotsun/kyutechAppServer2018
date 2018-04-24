@@ -26,6 +26,7 @@ class NewsHeadingAdmin(admin.ModelAdmin):
 # Syllabusの表示
 class SyllabusAdmin(admin.ModelAdmin):
     list_display = ('title', 'teacher_name', 'target_hour', 'academic_credit')
+    list_filter = ['target_hour']
 
 admin.site.register(NewsHeading, NewsHeadingAdmin)
 admin.site.register(News, NewsAdmin)
