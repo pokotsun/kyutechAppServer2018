@@ -14,7 +14,6 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('news_heading', 'attachement_titles', 'attachement_urls', 'created_at', 'updated_at')
     list_filter = ['news_heading', 'created_at']
 
-
 # NewsHeadingの表示
 class NewsHeadingAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'short_name', 'news_heading_code', 'color_code', 'updated_at')
@@ -24,7 +23,10 @@ class NewsHeadingAdmin(admin.ModelAdmin):
     ]
     inlines = [NewsInline]
 
+# Syllabusの表示
+class SyllabusAdmin(admin.ModelAdmin):
+    list_display = ('title', 'teacher_name', 'target_hour', 'academic_credit')
 
 admin.site.register(NewsHeading, NewsHeadingAdmin)
 admin.site.register(News, NewsAdmin)
-admin.site.register(Syllabus)
+admin.site.register(Syllabus, SyllabusAdmin)

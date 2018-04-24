@@ -19,11 +19,14 @@ class Command(BaseCommand):
         driver = initialize_html_state()
 
         # シラバス一覧の取得
-        syllubuse_links = driver.find_elements_by_class_name('js-syllabus-show-link')
+        syllabus_links = driver.find_elements_by_class_name('js-syllabus-show-link')
 
-        for (i, link) in enumerate(syllubuse_links):
+        print(f"全部で {len(syllabus_links)}個のシラバスがあります")
+        for (i, link) in enumerate(syllabus_links):
             link.click() # linkを呼び出す
-            sleep(5)
+            sleep(4)
             soup = get_soup(driver)
-            scrape_syllabus(soup)
+            print(f"{i}番目のシラバスを取得しています")
+            syllabus = scrape_syllabus(soup)
+            syllabus.save()
         driver.quit()

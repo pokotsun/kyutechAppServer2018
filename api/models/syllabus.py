@@ -12,7 +12,7 @@ class Syllabus(models.Model):
     teacher_name = models.CharField(max_length=50)
     target_participants = models.CharField(max_length=300, null=True)
     academic_credit = models.CharField(max_length=100, null=True)
-    academic_credit_num = models.IntegerField()
+    academic_credit_num = models.FloatField()
     target_class = models.CharField(max_length=100)
     target_term = models.CharField(max_length=100)
     class_number = models.IntegerField()
@@ -55,7 +55,7 @@ class Syllabus(models.Model):
         elif label in "【単位区分】":
             self.academic_credit = value
         elif label in "【単位数】":
-            self.academic_credit_num = int(value)
+            self.academic_credit_num = float(value or "0")
         elif label in "【対象学年】":
             self.target_class = value
         elif label in "【開講学期】":
@@ -63,14 +63,12 @@ class Syllabus(models.Model):
         elif label in "【クラス】":
             self.class_number = int(value)
         elif label in "【曜日・時限】":
-            self.target_hour = value
+            self.target_hour = value.replace("曜,", "曜")
         elif label in "【講義室】":
             self.target_place = value
         elif label in "【更新日】":
             date_info = list(map(lambda x: int(x), value.split(",")[0].split("/")))
-            self.published_date = datetime(
-                date_info[0], date_info[1], date_info[2]
-            )
+            self.published_date = datetime(date_info[0], date_info[1], date_info[2])
         elif label in "授業の概要":
             self.abstract = value
         elif label in "カリキュラムにおけるこの授業の位置付け" or label in "カリキュラムにおけるこの授業の位置づけ":
