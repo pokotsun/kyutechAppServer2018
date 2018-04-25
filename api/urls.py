@@ -2,7 +2,7 @@
 from rest_framework import routers
 from .views.NewsHeadingViewSet import NewsHeadingViewSet
 from .views.NewsViewSet import NewsViewSet, FilteredNewsViewSet
-from .views.SyllabusViewSet import SyllabusViewSet
+from .views.SyllabusViewSet import SyllabusViewSet, FilteredSyllabusViewSet
 from django.conf.urls import url
 from django.urls import path
 
@@ -16,4 +16,5 @@ router.register(r'syllabus', SyllabusViewSet)
 urlpatterns = [
     #path(r'news/code:<int:code>', FilteredNewsViewSet.as_view()),
     path(r'news/code-<int:code>/', FilteredNewsViewSet.as_view()),
+    path(r'syllabus/day-<str:day>/period-<str:period>', FilteredSyllabusViewSet.as_view())
 ]

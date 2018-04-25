@@ -7,6 +7,15 @@ class Syllabus(models.Model):
     class Meta:
         verbose_name_plural = 'Syllabus'
 
+    _day_list = (
+        ("m.*", "月曜"),
+        ("tu.*", "火曜"),
+        ("w.*", "水曜"),
+        ("th.*", "木曜"),
+        ("f.*", "金曜"),
+        (".*", "月曜"),
+    )
+
     title = models.CharField(max_length=100)
     subject_code = models.IntegerField()
     teacher_name = models.CharField(max_length=50)
@@ -16,7 +25,7 @@ class Syllabus(models.Model):
     target_class = models.CharField(max_length=100)
     target_term = models.CharField(max_length=100)
     class_number = models.IntegerField()
-    target_hour = models.CharField(max_length=200)
+    target_period = models.CharField(max_length=200)
     target_place = models.CharField(max_length=150)
     published_date = models.DateTimeField()
 
@@ -96,3 +105,23 @@ class Syllabus(models.Model):
         else:
             print(f"{label}は指定のラベルではありません。\n value: {value}")
             raise ValueError
+
+    # dayとperiodでフィルターしたSyllabusリストを返す day: "mon" ~ "fri", period: "0" ~ "4"
+    def filter_by_day_and_period(day, period):
+        if day is not None and period is not None:
+            return Syllabus.objects.filter(
+                target_period__contains=f"{Syllabus._convert_day(day)}{Syllabus._convert_period(period)}"
+            )
+        else:
+            return None
+
+    """     private 関数群       """
+    # dayコードをDB検索用の文字列に変換
+    def _convert_day(day_code):
+        return next(v for k,v in Syllabus._day_list if re.match(k, day_code))
+
+    def _convert_period(period_code):
+        if re.match("[0-4]", period_code):
+            return str(int(period_code) + 1) + "限"
+        else:
+            return ""
