@@ -108,8 +108,8 @@ class Syllabus(models.Model):
 
     # dayとperiodでフィルターしたSyllabusリストを返す day: "mon" ~ "fri", period: "0" ~ "4"
     def filter_by_day_and_period(day_code, period_code):
-        day = Syllabus._convert_day(day_code)
-        period = Syllabus._convert_period(period_code)
+        day = Syllabus.convert_day(day_code)
+        period = Syllabus.convert_period(period_code)
         if day is not None and period is not None:
             return Syllabus.objects.filter(
                 target_period__contains=f"{day}{period}"
@@ -117,12 +117,11 @@ class Syllabus(models.Model):
         else:
             return None
 
-    """     private 関数群       """
     # dayコードをDB検索用の文字列に変換
-    def _convert_day(day_code):
+    def convert_day(day_code):
         return next(v for k,v in Syllabus._day_list if re.match(k, day_code))
 
-    def _convert_period(period_code):
+    def convert_period(period_code):
         if re.match("[0-4]", period_code):
             return str(int(period_code) + 1) + "限"
         else:
