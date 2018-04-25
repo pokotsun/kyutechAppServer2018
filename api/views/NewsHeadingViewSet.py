@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 from ..models import NewsHeading
-from ..serializers.NewsHeadingSerializer import NewsHeadingSerializer
+from ..serializers import NewsHeadingSerializer
 
 class NewsHeadingViewSet(viewsets.ModelViewSet):
     queryset = NewsHeading.objects.all()

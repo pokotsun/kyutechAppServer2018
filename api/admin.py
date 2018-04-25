@@ -4,6 +4,7 @@ from .models.news import News
 from .models.news_heading import  NewsHeading
 from .models.syllabus import Syllabus
 from .models.user import User
+from .models.user_schedule import UserSchedule
 # Register your models here.
 
 class NewsInline(admin.TabularInline):
@@ -31,7 +32,9 @@ class SyllabusAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
+
 admin.site.register(NewsHeading, NewsHeadingAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Syllabus, SyllabusAdmin)
 admin.site.register(User)
+admin.site.register(UserSchedule)

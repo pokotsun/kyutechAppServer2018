@@ -11,4 +11,4 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{school_year}, {department}, {created_at}"
+        return f"{self.school_year}, {self.department}, {self.created_at}"

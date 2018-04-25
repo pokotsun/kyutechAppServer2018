@@ -1,7 +1,7 @@
 from rest_framework import generics, viewsets
 
 from ..models import Syllabus
-from ..serializers.SyllabusSerializer import SyllabusSerializer
+from ..serializers import SyllabusSerializer
 
 class SyllabusViewSet(viewsets.ModelViewSet):
     queryset = Syllabus.objects.all()
