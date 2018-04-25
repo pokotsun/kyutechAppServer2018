@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # ユーザーモデル
 class User(models.Model):
     class Meta:
