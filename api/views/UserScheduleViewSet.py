@@ -8,6 +8,10 @@ class UserScheduleViewSet(viewsets.ModelViewSet):
     queryset = UserSchedule.objects.all()
     serializer_class = UserScheduleSerializer
 
+    # 一覧表示は必要ないため用意しない
+    def list(self, request):
+        pass
+
 # フィルタリングされたNewsを表示する
 # class FilteredNewsViewSet(generics.ListAPIView):
 #     serializer_class = NewsSerializer
