@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from ..models import UserSchedule, User, Syllabus
 from ..serializers.syllabus_serializer import SyllabusSerializer
 from ..serializers.user_serializer import UserSerializer
@@ -23,3 +22,32 @@ class UserScheduleSerializer(serializers.ModelSerializer):
 
     def get_syllabus(self, obj):
         return SyllabusSerializer(obj.syllabus)
+
+    def create(self, validated_data):
+        """ Add UserSchedule"""
+        new_schedule = UserSchedule(
+            user = validated_data['user'],
+            syllabus = validated_data['syllabus'],
+            day = validated_data['day'],
+            period = validated_data['period'],
+            quarter = validated_data['quarter'],
+            is_valid = True,
+        )
+
+        past_schedules = UserSchedule.objects.filter(
+            user = new_schedule.user,
+            day = new_schedule.day,
+            period = new_schedule.period,
+            is_valid = True,
+        ).order_by('updated_at').reverse()
+
+        if past_schedules: # past_schedulesが空でなければ
+            past_schedule = past_schedules.last()
+            past_schedule.is_valid = False
+            past_schedule.save()
+            print(f"\n past_schedule: {past_schedule}\n")
+
+        print(f"\nnew_schedule: {new_schedule}\n")
+        new_schedule.save()
+
+        return new_schedule

@@ -44,7 +44,7 @@ class Syllabus(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Syllabus: {self.title}\nteacher_name: {self.teacher_name}"
+        return f"Syllabus: {self.title} teacher_name: {self.teacher_name}"
 
     # タイトルをsetする
     def set_title(self, title):

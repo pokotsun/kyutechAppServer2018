@@ -17,5 +17,4 @@ class UserSchedule(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"""{self.user}, {self.syllabus},
-        {Syllabus.convert_day(self.day), {Syllabus.convert_period(self.period)}}"""
+        return f"{self.pk}: {self.user}, {self.syllabus}, is_valid: {self.is_valid}"
