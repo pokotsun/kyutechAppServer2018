@@ -1,7 +1,10 @@
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
+from django.http import Http404
 from rest_framework import viewsets
-from ..models import UserSchedule
+from ..models import UserSchedule, User
 from ..serializers import UserScheduleSerializer
 
 class UserScheduleViewSet(viewsets.ModelViewSet):
@@ -12,17 +15,24 @@ class UserScheduleViewSet(viewsets.ModelViewSet):
     def list(self, request):
         pass
 
-# フィルタリングされたNewsを表示する
-# class FilteredNewsViewSet(generics.ListAPIView):
-#     serializer_class = NewsSerializer
-#
-#     def get_queryset(self):
-#         news_heading_code = self.kwargs['code']
-#         # これでusernameパラムとして取得できる
-#         #print(f"ゆーざーねーむ: {self.request.query_params.get('username', None)}")
-#
-#         # NewHeadingコードの存在確認
-#         if news_heading_code is not None:
-#             return News.filter_by_news_heading_code(news_heading_code)
-#         else:
-#             return None
+# フィルタリングされたUserScheduleを表示する
+class FilteredUserScheduleViewSet(generics.ListAPIView):
+    serializer_class = UserScheduleSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        # これでusernameパラムとして取得できる
+        #print(f"ゆーざーねーむ: {self.request.query_params.get('username', None)}")
+
+        print(f"{user_id}")
+        # user_idの存在確認
+        user = None
+        if user_id is not None:
+            try:
+                user = User.objects.get(pk=user_id)
+            except User.DoesNotExist:
+                raise Http404("Your Requested User Id Does not Exist!!")
+            return UserSchedule.objects.filter(is_valid=True, user=user)
+            # return News.filter_by_news_heading_code(news_heading_code)
+        else:
+            return None

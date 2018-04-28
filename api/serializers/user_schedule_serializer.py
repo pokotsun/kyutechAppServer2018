@@ -50,4 +50,5 @@ class UserScheduleSerializer(serializers.ModelSerializer):
         print(f"\nnew_schedule: {new_schedule}\n")
         new_schedule.save()
 
-        return new_schedule
+        # return new_schedule
+        return Response({"user_id": f"{new_schedule.user}"})
