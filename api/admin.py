@@ -3,8 +3,7 @@ from django.contrib import admin
 from .models.news import News
 from .models.news_heading import  NewsHeading
 from .models.syllabus import Syllabus
-from .models.user import User
-from .models.user_schedule import UserSchedule
+from .models import User, UserSchedule
 # Register your models here.
 
 class NewsInline(admin.TabularInline):
@@ -31,10 +30,17 @@ class SyllabusAdmin(admin.ModelAdmin):
     list_filter = ['target_period']
     search_fields = ['title']
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('school_year', 'department')
+    list_filter = ['school_year']
 
+
+class UserScheduleAdmin(admin.ModelAdmin):
+    list_display = ('user', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
+    list_filter = ['day']
 
 admin.site.register(NewsHeading, NewsHeadingAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Syllabus, SyllabusAdmin)
-admin.site.register(User)
-admin.site.register(UserSchedule)
+admin.site.register(User, UserAdmin)
+admin.site.register(UserSchedule, UserScheduleAdmin)
