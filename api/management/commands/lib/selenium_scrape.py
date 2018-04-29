@@ -54,15 +54,41 @@ def scrape_syllabus(soup):
     syllabus.set_title(subject_title.string)
     print(f"教科名: {subject_title.string}")
 
-    subject_content = subject_title.parent.next_sibling
-    while subject_content is not None:
-        attr_infos = subject_content.string.split('】')
-        label = attr_infos[0].lstrip('【')
-        value = ','.join(filter(lambda str: str != '', re.split(r'[, ]', attr_infos[1])))
-        print(f"{label}: {value}\n")
-        syllabus.set_model_attribute(label, value) # 属性のセット
+    # while subject_content is not None:
+    #     attr_infos = subject_content.string.split('】')
+    #     label = attr_infos[0].lstrip('【')
+    #     value = ','.join(filter(lambda str: str != '', re.split(r'[, ]', attr_infos[1])))
+    #     print(f"{label}: {value}\n")
+    #     syllabus.set_model_attribute(label, value) # 属性のセット
+    #
+    #     subject_content = subject_content.next_sibling # 次のエレメントをセット
 
-        subject_content = subject_content.next_sibling # 次のエレメントをセット
+    subject_content_tables = subject_title.parent.parent.find_all("table")
+
+    if len(subject_content_tables) == 2:
+        table = subject_content_tables[0]
+        tr_list = table.find_all("tr")
+
+        for tr in tr_list:
+            th_list = tr.find_all("th")
+            td_list = tr.find_all("td")
+            for (th, td) in zip(th_list, td_list):
+                label = th.string or ""
+                value = td.string or ""
+                syllabus.set_model_attribute(label, value)
+                print(f"{th.string}: {td.string}\n")
+
+        # 学部情報
+        table = subject_content_tables[1]
+        tr_list = table.find_all("tr")
+        value = ""
+        for (i, tr) in enumerate(tr_list):
+            # content_list = tr.children
+            if i != 0:
+                value += ','.join(tr.strings) + "\n"
+        value.lstrip("\n")
+        print(f"{value}")
+        syllabus.academic_credit_infos = value
 
     # コンテンツ情報を取得していく
     section_titles = soup.find_all(class_=re.compile(r"syllabus__section__title"))

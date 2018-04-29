@@ -26,7 +26,7 @@ class NewsHeadingAdmin(admin.ModelAdmin):
 
 # Syllabusの表示
 class SyllabusAdmin(admin.ModelAdmin):
-    list_display = ('title', 'teacher_name', 'target_period', 'academic_credit')
+    list_display = ('title', 'teacher_name', 'target_period')
     list_filter = ['target_period']
     search_fields = ['title']
 
