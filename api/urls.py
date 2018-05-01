@@ -11,10 +11,9 @@ from django.urls import path
 app_name = "api"
 
 urlpatterns = [
-    #path(r'news/code:<int:code>', FilteredNewsViewSet.as_view()),
     path(r'news/code-<int:code>/', FilteredNewsViewSet.as_view()),
     path(r'syllabuses/day-<str:day>/period-<str:period>', FilteredSyllabusViewSet.as_view()),
-    path(r'user-schedules/user-<int:user_id>/', FilteredUserScheduleViewSet.as_view())
+    path(r'user-schedules/user-<int:user_id>/quarter-<int:quarter_id>/', FilteredUserScheduleViewSet.as_view())
 ]
 
 router = routers.DefaultRouter()

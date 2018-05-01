@@ -3,8 +3,6 @@ from django.core.management.base import BaseCommand, CommandError
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
 
-#from api.management.commands import aiueo
-#import os
 
 class Command(BaseCommand):
 
@@ -44,5 +42,3 @@ class Command(BaseCommand):
 
         # タイトルを文字列を出力
         print(title)
-
-    #     print(soup.prettify())

@@ -1,6 +1,7 @@
 """定数を書いていく"""
 # スクレイピングで BASEとなるURL
-SCRAPE_BASE_URL = "https://db.jimu.kyutech.ac.jp/cgi-bin/cbdb/"
+SCRAPE_NEWS_URL = "https://db.jimu.kyutech.ac.jp/cgi-bin/cbdb/"
+SCRAPE_SYLLABUS_URL = "https://edragon-syllabus.jimu.kyutech.ac.jp/guest/syllabuses"
 
 # 文を区切るときに使う文字列
 YOKE_CODE = "|%&%|"

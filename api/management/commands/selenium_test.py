@@ -11,7 +11,7 @@ import random
 
 class Command(BaseCommand):
 
-    # python manage.py help count_entryで表示されるメッセージ
+    # python manage.py help で表示されるメッセージ
     help = 'Seleniumのテスト'
 
     # # コマンドが実行された時に呼ばれるメソッド

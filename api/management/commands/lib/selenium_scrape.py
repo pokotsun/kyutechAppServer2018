@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 import re
 from api.models import Syllabus
+from api.const import SCRAPE_SYLLABUS_URL
 
 # htmlの状態をシラバスが取れる状態までする ドライバーを返す
 def initialize_html_state():
@@ -18,14 +19,14 @@ def initialize_html_state():
     options.add_argument('--window-size=1280,1024')
 
     driver = webdriver.Chrome(chrome_options=options)
-    driver.get('https://edragon-syllabus.jimu.kyutech.ac.jp/guest/syllabuses') # ページを開く
+    driver.get(f"{SCRAPE_SYLLABUS_URL}") # ページを開く
     print(driver.title) #=> 九州工業大学シラバス
     faculty_select = driver.find_element_by_id('belong_children_faculty') # selectboxエレメントをidから取得
     faculty_select_element = Select(faculty_select) # セレクトボックスを取得
     faculty_select_element.select_by_value('278') # 情報工学部を選択
 
     driver.find_element_by_class_name('js-simple-search-btn').click() # 検索ボタンをクリック
-    sleep(5) # 検索ボタン結果が反映されるまで待つ
+    sleep(10) # 検索ボタン結果が反映されるまで待つ
 
     return driver
 

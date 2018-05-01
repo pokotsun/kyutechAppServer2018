@@ -28,7 +28,7 @@ class News(models.Model):
     def get_most_recent_filtered_news(news_heading_code):
         return News.filter_by_news_heading_code(news_heading_code).reverse().first()
 
-    # 各種モデル上のInfoをデコードする関数
+    # 各種モデル上の情報をデコードする関数
     def decode_infos(self):
         return self.infos.split(YOKE_CODE)
 
@@ -39,7 +39,7 @@ class News(models.Model):
         return self.attachement_urls.split(YOKE_CODE)
 
     # saveのオーバーライド
-    # Newsがsaveされた場合そのNewsの親となるNewsHeadingのupdated_atを更新させたいから
+    # Newsがsaveされた場合そのNewsの親となるNewsHeadingのupdated_atを更新させたいため
     def save(self):
         super().save()
         self.news_heading.save()

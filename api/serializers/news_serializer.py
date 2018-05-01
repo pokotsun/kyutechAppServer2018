@@ -3,7 +3,7 @@
 from rest_framework import serializers
 
 from ..models import News
-from ..const import SCRAPE_BASE_URL
+from ..const import SCRAPE_NEWS_URL
 
 class NewsSerializer(serializers.ModelSerializer):
     infos = serializers.SerializerMethodField()
@@ -34,6 +34,6 @@ class NewsSerializer(serializers.ModelSerializer):
         #for i in range(attachement_count):
         for (field_name, title, url) in zip(field_names, attachement_titles, attachement_urls):
         #for i,(title, url) in enumerate(zip(attachement_titles, attachement_urls)):
-            rtn[field_name] = {"title": title, "url": f"{SCRAPE_BASE_URL}{url}"}
+            rtn[field_name] = {"title": title, "url": f"{SCRAPE_NEWS_URL}{url}"}
 
         return rtn

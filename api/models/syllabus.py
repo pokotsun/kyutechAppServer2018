@@ -20,7 +20,7 @@ class Syllabus(models.Model):
     subject_code = models.IntegerField()
     teacher_name = models.CharField(max_length=50)
     academic_credit_infos = models.CharField(max_length=500)
-    target_class = models.CharField(max_length=100)
+    target_school_year = models.CharField(max_length=100)
     target_term = models.CharField(max_length=100)
     class_number = models.IntegerField()
     target_period = models.CharField(max_length=200)
@@ -34,8 +34,8 @@ class Syllabus(models.Model):
     performance_target = models.CharField(max_length=1000)
     valuation_basis = models.CharField(max_length=1000)
     instruction_out_learning = models.CharField(max_length=1000, null=True)
-    keyword = models.CharField(max_length=500, null=True)
-    text_book = models.CharField(max_length=500, null=True)
+    keywords = models.CharField(max_length=500, null=True)
+    text_books = models.CharField(max_length=500, null=True)
     study_aid_books = models.CharField(max_length=500, null=True)
     notes = models.CharField(max_length=500, null=True)
     professor_email = models.CharField(max_length=100, null=True)
@@ -87,9 +87,9 @@ class Syllabus(models.Model):
         elif label in "授業外学習（予習・復習）の指示":
             self.instruction_out_learning = value
         elif label in "キーワード":
-            self.keyword = value
+            self.keywords = value
         elif label in "教科書":
-            self.text_book = value
+            self.text_books = value
         elif label in "参考書":
             self.study_aid_books = value
         elif label in "備考":

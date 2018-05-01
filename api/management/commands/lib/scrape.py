@@ -4,13 +4,13 @@ import urllib.request, urllib.error
 from bs4 import BeautifulSoup
 import re
 from time import sleep
-from api.const import SCRAPE_BASE_URL, YOKE_CODE
+from api.const import SCRAPE_NEWS_URL, YOKE_CODE
 from api.models import NewsHeading, News
 
 # 次のNewsに移動する
 def go_to_next_news(news):
     # htmlをBeautifulSoupで扱う
-    soup = get_soup(f"{SCRAPE_BASE_URL}{news.url_params}")
+    soup = get_soup(f"{SCRAPE_NEWS_URL}{news.url_params}")
 
     # 次に移動するURLを取得する
     next_tag = soup.find_all(text=re.compile("前へ"))[0].parent
@@ -47,7 +47,7 @@ def scrape_news(news_url_params, news_heading_code):
     news_heading = NewsHeading.objects.get(
         news_heading_code=news_heading_code)
 
-    scrape_url = f"{SCRAPE_BASE_URL}{news_url_params}"
+    scrape_url = f"{SCRAPE_NEWS_URL}{news_url_params}"
     print(f"scrape_url: {scrape_url}")
     # htmlをBeautifulSoupで扱う
     soup = get_soup(scrape_url)

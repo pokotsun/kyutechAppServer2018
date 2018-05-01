@@ -3,21 +3,22 @@ from rest_framework import serializers
 from ..models import Syllabus
 
 class SyllabusSerializer(serializers.ModelSerializer):
-    academic_credit_infos = serializers.SerializerMethodField()
+    target_participants_infos = serializers.SerializerMethodField()
+    academic_credit_infos = serializers.CharField(max_length=500, write_only=True)
 
     class Meta:
         model = Syllabus
         fields = (
-            "title", "subject_code", "teacher_name", "academic_credit_infos",
-            "target_class", "target_term", "class_number", "target_period",
+            "title", "subject_code", "teacher_name", "target_participants_infos",
+            "target_school_year", "target_term", "class_number", "target_period",
             "published_date", "abstract", "positioning", "lecture_content",
             "lecture_processing", "performance_target", "valuation_basis",
-            "instruction_out_learning", "keyword", "text_book", "study_aid_books",
-            "notes", "professor_email",
+            "instruction_out_learning", "keywords", "text_books", "study_aid_books",
+            "notes", "professor_email", 'academic_credit_infos',
         )
         # exclude = ('created_at',) # created_atのみ除く
 
-    def get_academic_credit_infos(self, obj):
+    def get_target_participants_infos(self, obj):
         infos = obj.academic_credit_infos.split("\n")
 
         rtn = []

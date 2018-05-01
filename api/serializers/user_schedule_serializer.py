@@ -4,13 +4,10 @@ from ..serializers.syllabus_serializer import SyllabusSerializer
 from ..serializers.user_serializer import UserSerializer
 
 class UserScheduleSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
-    # syllabus = SyllabusSerializer()
     user_id = serializers.PrimaryKeyRelatedField(source='user',  queryset=User.objects.all(), write_only=True)
     user = UserSerializer(read_only=True)
     syllabus_id = serializers.PrimaryKeyRelatedField(source='syllabus', queryset=Syllabus.objects.all(), write_only=True)
     syllabus = SyllabusSerializer(read_only=True)
-    # is_valid = serializers.BooleanField(write_only=True)
 
     class Meta:
         model = UserSchedule
