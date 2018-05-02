@@ -8,9 +8,9 @@
 
 1. Explanation of Model
 2. Explanation of URL
-3. Enviroments 
-4. How to Execute 
-5. Thanks 
+3. Enviroments
+4. How to Execute
+5. Thanks
 
 できるだけの確認はしましたがエラーの可能性あり。
 
@@ -133,13 +133,13 @@ attachement_infosの中では各添付資料の資料番号(添付資料2など)
 | period   | int      | 履修時限を表す 0: 1限, 1: 2限, ,,, 4: 5限 と行った感じ                                                                  | 2                  |
 | quarter  | int      | 履修した科目は何クォーターで履修しているかを表す。 0: 1クオーター, 1: 2クオーター, 2: 3クオーター, 3: 4クオーターとなる | 3                  |
 
-## 2. Explanation of URL 
+## 2. Explanation of URL
 ここではAPIにおいて使用できるエンドポイントを説明します。
 いちおうRESTに基づいて作成してますが仕様上必要のないエンドポイントは省略しています。
 
  BASE_URL : `localhost:8000/api`
 
-### 2.1 List Of API 
+### 2.1 List Of API
 
 | EndPoint                                                        | HTTP Method | description                                           | request data_type | response_type |
 |-----------------------------------------------------------------|-------------|-------------------------------------------------------|-------------------|---------------|
@@ -231,7 +231,7 @@ Newsの見出し情報を一覧取得します。
     Content-Type : application/json
 
     Response json:
-    [ 
+    [
         {
             "news_heading_code": 357,
             "short_name": "知",
@@ -273,7 +273,7 @@ codeとしてはNewsHeading一覧から取得した`news_heading_code`を使用�
                 "添付資料(1)": {
                     "title": "講義室変更.pdf",
                     "url": "https://aiueo/a.pdf"
-                } 
+                }
             }
         },
         ,,,(省略)
@@ -348,7 +348,7 @@ primary key = syllabus_id であるsyllabusを取得する。
     URL Example: /syllabuses/2018/
 
     HTTP/1.1 200
-    
+
     Content-Type: application/json
 
     Response json:
@@ -446,7 +446,7 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
         "syllabus_id": 2018,
         "day": 0,
         "period": 3,
-        "quarter": 0 
+        "quarter": 0
     }
 
     Response json:
@@ -492,7 +492,7 @@ quarter_idは 0 ~ 3までの数字であり、(quarter_id + 1)クオーターと
 
 
 
-## 3. Enviroments 
+## 3. Enviroments
 - Python 3.6.3
 
 - module類
@@ -506,7 +506,7 @@ quarter_idは 0 ~ 3までの数字であり、(quarter_id + 1)クオーターと
         selenium==3.11.0
         six==1.11.0
 
-## 4. How to Execute 
+## 4. How to Execute
 python 3.6.3, pip 9.0.3が入っている前提ですすめる。
 
 初期化処理についてのみ説明する。
@@ -524,4 +524,3 @@ python 3.6.3, pip 9.0.3が入っている前提ですすめる。
 
 
 `python manage.py scrape_news`とたたくことでNewsを最新の状態に更新できる。
-
