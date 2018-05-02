@@ -12,7 +12,7 @@ class FilteredSyllabusViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         day = self.kwargs['day']
-        period = self.kwargs['period']
+        period = str(self.kwargs['period'])
         # day = self.request.query_params.get('day', None)
         # period = self.request.query_params.get('period', None)
 

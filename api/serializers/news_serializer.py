@@ -11,7 +11,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = News
-        fields = ('news_heading', 'infos', 'attachement_infos')
+        fields = ('infos', 'attachement_infos')
 
     def get_infos(self, obj):
         field_names = obj.news_heading.decode_field_names()

@@ -9,5 +9,5 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     # 一覧表示は必要ないため用意しない
-    def list(self, request):
-            pass
+    # def list(self, request):
+    #         pass

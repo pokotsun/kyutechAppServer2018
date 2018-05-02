@@ -12,8 +12,8 @@ class UserScheduleViewSet(viewsets.ModelViewSet):
     serializer_class = UserScheduleSerializer
 
     # 一覧表示は必要ないため用意しない
-    def list(self, request):
-        pass
+    # def list(self, request):
+    #     pass
 
 # フィルタリングされたUserScheduleを表示する
 class FilteredUserScheduleViewSet(generics.ListAPIView):

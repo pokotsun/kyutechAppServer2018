@@ -11,7 +11,7 @@ class UserScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSchedule
-        fields = ('user_id', 'user', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
+        fields = ('user_id', 'user', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter')
         # exclude = ('created_at', 'updated_at') # created_atのみ除く
 
     def get_user(self, obj):
@@ -47,5 +47,5 @@ class UserScheduleSerializer(serializers.ModelSerializer):
         print(f"\nnew_schedule: {new_schedule}\n")
         new_schedule.save()
 
-        # return new_schedule
-        return Response({"user_id": f"{new_schedule.user}"})
+        return new_schedule
+        # return Response({"user_id": f"{new_schedule.user}"})

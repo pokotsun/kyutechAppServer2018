@@ -58,7 +58,7 @@ class Syllabus(models.Model):
         elif label in "【担当教員】":
             self.teacher_name = value
         elif label in "【対象学年】":
-            self.target_class = value
+            self.target_school_year = value
         elif label in "【開講学期】":
             self.target_term = value
         elif label in "【クラス】":
