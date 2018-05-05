@@ -22,7 +22,7 @@ NEWS_HEADING_INFOS = [
         "short_name": "変",
         "name":"時間割・講義室変更",
         "news_heading_code": 391,
-        "color_code": "##6495ED",
+        "color_code": "#6495ED",
         "fields": ["タイトル", "科目名", "教員名", "対象学科", "対象学年", "日付", "時限", "種別", "変更前", "変更後", "内容"],
         "attachement_num": 0,
         "init_url": "db.cgi?page=DBRecord&did=391&qid=all&vid=24&rid=4&Head=24&hid=265&sid=n&rev=0&ssid=3-2042-7255-g72"

@@ -2,6 +2,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from api.management.commands.lib.initialization import initialize_syllabus
 from api.models import Syllabus
+
 class Command(BaseCommand):
 
     # python manage.py helpで表示されるメッセージ
