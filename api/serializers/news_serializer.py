@@ -16,11 +16,9 @@ class NewsSerializer(serializers.ModelSerializer):
     def get_infos(self, obj):
         field_names = obj.news_heading.decode_field_names()
         infos = obj.decode_infos()
-        #print(f"infos: {infos}\n\n")
-
-        rtn = {} # 初期化
+        rtn = [] # 初期化
         for (field_name, info) in zip(field_names, infos):
-            rtn[field_name] = info
+            rtn.append({"title": field_name, "content": info})
 
         return rtn
 
@@ -29,11 +27,8 @@ class NewsSerializer(serializers.ModelSerializer):
         attachement_titles = obj.decode_attachement_titles()
         attachement_urls = obj.decode_attachement_urls()
 
-        #print(f"attachement_infos: {attachement_titles} : {attachement_urls}")
-        rtn = {} #初期化
-        #for i in range(attachement_count):
-        for (field_name, title, url) in zip(field_names, attachement_titles, attachement_urls):
-        #for i,(title, url) in enumerate(zip(attachement_titles, attachement_urls)):
-            rtn[field_name] = {"title": title, "url": f"{SCRAPE_NEWS_URL}{url}"}
+        rtn = [] #初期化
+        for (field_name, link_name, url) in zip(field_names, attachement_titles, attachement_urls):
+            rtn.append({"title": field_name, "link_name": link_name, "url": url})
 
         return rtn

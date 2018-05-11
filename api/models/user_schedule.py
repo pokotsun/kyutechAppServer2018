@@ -42,6 +42,9 @@ class UserSchedule(models.Model):
     period = models.IntegerField(default=FIFTH_PERIOD, choices=PERIOD_SET)
     quarter = models.IntegerField(default=FIRST_QUARTER, choices=QUARTER_SET)
     is_valid = models.BooleanField(default=True)
+    memo = models.CharField(max_length=300, default="")
+    late_num = models.IntegerField(default=0)
+    absent_num = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

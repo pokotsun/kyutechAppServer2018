@@ -31,7 +31,7 @@
 ### 1.1 NewsHeading
 お知らせ情報の見出しを表すモデル
 
-#### column
+#### Column
 
 | Name              | Type   | Description                        | Example            |
 |-------------------|--------|------------------------------------|--------------------|
@@ -44,28 +44,37 @@
 ### 1.2 News
 お知らせを表すモデル
 
-#### column
+#### Column
 | Name              | Type        | Description                      | Example                   |
 |-------------------|-------------|----------------------------------|---------------------------|
 | infos             | object      | 各種情報が入れ子となっている     | "infos": {,,,}            |
 | attachement_infos | object      | 添付資料の情報が入れ異なっている | "attachement_infos: {,,,} |
 
 #### infosの説明
-infosの中では各情報のkey=タイトルとvalue=内容の辞書となって格納されています。詳細はURLにて。
+infosの中では各情報のタイトルと内容を含むobjectがlistとなって格納されています。
+
+以下の2つの要素がひとつのinfoを形成しています。
+
+| Name    | Type   | Description                        | Example  |
+|---------|--------|------------------------------------|----------|
+| title   | string | 実際にアプリで表示する際のタイトル | 件名     |
+| content | string | titleの内容                        | 学生呼出 |
+
 
 #### attachement_infosの説明
-attachement_infosの中では各添付資料の資料番号(添付資料2など)と内容が対となって格納されています。
-以下の2角要素がひとつのattachement_infoを形成しています。
+attachement_infosの中では各添付資料の資料番号(添付資料2など)と内容がひとつのobjectとなっています。
+以下の3つの要素がひとつのattachement_infoを形成しています。
 
-| Name  | Type   | Description                 | Example                |
-|-------|--------|-----------------------------|------------------------|
-| title | string | 添付資料のタイトル          | 講義室変更について.pdf |
-| url   | string | 添付資料のダウンロード先URL | https://aiueo/a.pdf    |
+| Name      | Type   | Description                        | Example                |
+|-----------|--------|------------------------------------|------------------------|
+| title     | string | 実際にアプリで表示する際のタイトル | 添付資料(1)            |
+| link_name | string | 添付資料のタイトル                 | 講義室変更について.pdf |
+| url       | string | 添付資料のダウンロード先URL        | https://aiueo/a.pdf    |
 
 ### 1.3 Syllabus
 授業情報を表すモデル
 
-#### column
+#### Column
 | Name                      | Type   | Description                                                                        | Example                          |
 |---------------------------|--------|------------------------------------------------------------------------------------|----------------------------------|
 | title                     | string | 授業名                                                                             | 解析Ⅰ                           |
@@ -101,9 +110,9 @@ attachement_infosの中では各添付資料の資料番号(添付資料2など)
 | academic_credit_num  | float  | 対象学科においてこの授業を履修することでいくつ単位をもらえるのかを示す | 0.0                                                |
 
 ### 1.4 User
-利用ユーザーを表す
+利用ユーザーを表します
 
-#### column
+#### Column
 | Name        | Type | Description                                                                        | Example |
 |-------------|------|------------------------------------------------------------------------------------|---------|
 | pk          | int  | primary Key                                                                        | 1       |
@@ -125,13 +134,17 @@ attachement_infosの中では各添付資料の資料番号(添付資料2など)
 
 1データがあるユーザーの履修予定授業1コマを表します。
 
-#### column
-| Name     | Type     | Description                                                                                                             | Example            |
-|----------|----------|-------------------------------------------------------------------------------------------------------------------------|--------------------|
-| syllabus | Syllabus | 履修教科を示す                                                                                                          | Syllabusの項を参照 |
-| day      | int      | 履修曜日を表す 0: Mon, 1: Tues, ,,, 4: Fri と言った感じ                                                                 | 3                  |
-| period   | int      | 履修時限を表す 0: 1限, 1: 2限, ,,, 4: 5限 と行った感じ                                                                  | 2                  |
-| quarter  | int      | 履修した科目は何クォーターで履修しているかを表す。 0: 1クオーター, 1: 2クオーター, 2: 3クオーター, 3: 4クオーターとなる | 3                  |
+#### Column
+| Name       | Type     | Description                                                                                                             | Example                  |
+|------------|----------|-------------------------------------------------------------------------------------------------------------------------|--------------------------|
+| syllabus   | Syllabus | 履修教科を示す                                                                                                          | Syllabusの項を参照       |
+| day        | int      | 履修曜日を表す 0: Mon, 1: Tues, ,,, 4: Fri と言った感じ                                                                 | 3                        |
+| period     | int      | 履修時限を表す 0: 1限, 1: 2限, ,,, 4: 5限 と行った感じ                                                                  | 2                        |
+| quarter    | int      | 履修した科目は何クォーターで履修しているかを表す。 0: 1クオーター, 1: 2クオーター, 2: 3クオーター, 3: 4クオーターとなる | 3                        |
+| memo       | string   | ユーザーが教科に対して残したメモ                                                                                        | 2/13レポート提出必要アリ |
+| late_num   | int      | 遅刻回数                                                                                                                | 3                        |
+| absent_num | int      | 欠席回数                                                                                                                | 4                        |
+
 
 ## 2. Explanation of URL
 ここではAPIにおいて使用できるエンドポイントを説明します。
@@ -152,6 +165,7 @@ attachement_infosの中では各添付資料の資料番号(添付資料2など)
 | `syllabuses/<int:syllabus_id>`                                  | GET         | シラバス詳細取得                                      | None              | json          |
 | `syllabuses/day-<int: day>/period-<int:period>`                 | GET         | ある日にち、時限におけるシラバス一覧取得              | None              | json          |
 | `/user-schedules/`                                              | POST        | ユーザーの時間割の作成                                | json              | json          |
+| `/user-schedules/<int: user-schedule-id>`                       | PUT         | ユーザーの時間割情報の更新                            | json              | json          |
 | `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>` | GET         | あるユーザーが設定したnクオーターにおける時間割の取得 | None              | json          |
 
 
@@ -167,7 +181,7 @@ attachement_infosの中では各添付資料の資料番号(添付資料2など)
     Request json:
     {
         "school_year": 3,
-        "depart_ment": 2
+        "department": 2
     }
 
     Response json:
@@ -223,7 +237,7 @@ attachement_infosの中では各添付資料の資料番号(添付資料2など)
         "updated_at": "2018/05/02 16:24"
     }
 
-##### 2.2.4 GET `news-headings/`
+##### 2.2.4 GET `/news-headings/`
 Newsの見出し情報を一覧取得します。
 
     HTTP/1.1 200
@@ -242,9 +256,9 @@ Newsの見出し情報を一覧取得します。
         ,,,(以下省略)
     ]
 
-#### 2.2.5 GET `news/code-<int: news_heading_code>/`
+#### 2.2.5 GET `/news/code-<int: news_heading_code>/`
 あるNewsHeadingに紐付いたNews情報を一覧取得します.
-codeとしてはNewsHeading一覧から取得した`news_heading_code`を使用します.
+codeとしてはNewsHeading一覧から取得した `news_heading_code` を使用します.
 
     Example url : /api/news/code-354/
 
@@ -342,8 +356,9 @@ codeとしてはNewsHeading一覧から取得した`news_heading_code`を使用�
     ]
 
 #### 2.2.7 GET `/syllabuses/<int: syllabus_id>`
-primary key = syllabus_id であるsyllabusを取得する。
-余り使わないと思う.
+primary key = syllabus_id であるsyllabusを取得する
+
+余り使わないと思う
 
     URL Example: /syllabuses/2018/
 
@@ -427,7 +442,7 @@ periodについては(period + 1)限目を取得する。
 取得するデータの構成は **2.2.6 GET /syllabuses/** とおなじため省略。
 
 #### 2.2.9 POST `/user-schedules/`
-ユーザーが設定した時間割のある1コマの情報を登録する。
+ユーザーが設定した時間割のある1コマの情報を登録します。
 
 dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してします。
 
@@ -446,7 +461,10 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
         "syllabus_id": 2018,
         "day": 0,
         "period": 3,
-        "quarter": 0
+        "quarter": 0,
+        "memo": "",
+        "late_num": 0,
+        "absent_num": 0
     }
 
     Response json:
@@ -459,10 +477,20 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
         },
         "day": 0,
         "period": 3,
-        "quarter": 0
+        "quarter": 0,
+        "memo": "",
+        "late_num": 0,
+        "absent_num": 0
     }
 
-#### 2.2.10  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
+#### 2.2.10 PUT `/user-schedules/<int: user-schedule-id>`
+ユーザーの時間割情報を更新します。primary keyが`user-schedule-id`のUserSchedule情報を更新します。
+
+基本的な情報については `2.2.9 POST /user-schedules/` に準拠します。
+
+リクエストのタイプは`2.2.9`における **Response json** と同じになっています。
+ 
+#### 2.2.11  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
 あるユーザーのnクオーターにおける時間割を返します。
 
 UserScheduleオブジェクトのリストとして表現しています。
@@ -496,15 +524,15 @@ quarter_idは 0 ~ 3までの数字であり、(quarter_id + 1)クオーターと
 - Python 3.6.3
 
 - module類
-    ###
-        beautifulsoup4==4.6.0
-        Django==2.0.4
-        django-extensions==2.0.6
-        django-filter==1.1.0
-        djangorestframework==3.8.0
-        pytz==2018.3
-        selenium==3.11.0
-        six==1.11.0
+# 
+    beautifulsoup4==4.6.0
+    Django==2.0.4
+    django-extensions==2.0.6
+    django-filter==1.1.0
+    djangorestframework==3.8.0
+    pytz==2018.3
+    selenium==3.11.0
+    six==1.11.0
 
 ## 4. How to Execute
 python 3.6.3, pip 9.0.3が入っている前提ですすめる。
@@ -516,10 +544,13 @@ python 3.6.3, pip 9.0.3が入っている前提ですすめる。
 2. `pip install -r requirements.txt`
 を実行し、必要なモジュール群をinstallする。
 
-3. `python manage.py initialize_news`
+3. `python manage.py migrate`
+を実行してMigrationする
+
+4. `python manage.py initialize_news`
 を実行し、学生のお知らせ情報を取得する。
 
-4. `python manage.py initialize_syllabus`
+5. `python manage.py initialize_syllabus`
 を実行し、授業情報を取得する。
 
 

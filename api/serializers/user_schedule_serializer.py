@@ -4,15 +4,16 @@ from ..serializers.syllabus_serializer import SyllabusSerializer
 from ..serializers.user_serializer import UserSerializer
 
 class UserScheduleSerializer(serializers.ModelSerializer):
+    # postの時はuser_idのみ、 getの時はuser情報すべてを渡せるようにする
     user_id = serializers.PrimaryKeyRelatedField(source='user',  queryset=User.objects.all(), write_only=True)
     user = UserSerializer(read_only=True)
+
     syllabus_id = serializers.PrimaryKeyRelatedField(source='syllabus', queryset=Syllabus.objects.all(), write_only=True)
     syllabus = SyllabusSerializer(read_only=True)
 
     class Meta:
         model = UserSchedule
-        fields = ('user_id', 'user', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter')
-        # exclude = ('created_at', 'updated_at') # created_atのみ除く
+        fields = ('user_id', 'user', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter', 'memo', 'late_num', 'absent_num')
 
     def get_user(self, obj):
         return UserSerializer()
@@ -28,6 +29,7 @@ class UserScheduleSerializer(serializers.ModelSerializer):
             day = validated_data['day'],
             period = validated_data['period'],
             quarter = validated_data['quarter'],
+            memo = validated_data['memo'],
             is_valid = True,
         )
 
@@ -42,9 +44,9 @@ class UserScheduleSerializer(serializers.ModelSerializer):
             past_schedule = past_schedules.last()
             past_schedule.is_valid = False
             past_schedule.save()
-            print(f"\n past_schedule: {past_schedule}\n")
+            # print(f"\n past_schedule: {past_schedule}\n")
 
-        print(f"\nnew_schedule: {new_schedule}\n")
+        # print(f"\nnew_schedule: {new_schedule}\n")
         new_schedule.save()
 
         return new_schedule

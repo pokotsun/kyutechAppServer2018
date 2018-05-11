@@ -19,8 +19,8 @@ class SyllabusSerializer(serializers.ModelSerializer):
         # exclude = ('created_at',) # created_atのみ除く
 
     def get_target_participants_infos(self, obj):
-        infos = obj.academic_credit_infos.split("\n")
 
+        infos = obj.academic_credit_infos.split("\n")
         rtn = []
         for info in infos:
             info = info.split(",")
