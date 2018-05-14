@@ -22,4 +22,4 @@ router.register(r'syllabuses', SyllabusViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'user-schedules', UserScheduleViewSet)
 
-# router.register(r'news', NewsViewSet)
+router.register(r'news', NewsViewSet)

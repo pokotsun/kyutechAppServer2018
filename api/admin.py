@@ -12,15 +12,16 @@ class NewsInline(admin.TabularInline):
 
 # Newsの表示
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('news_heading', 'attachement_titles', 'attachement_urls', 'created_at', 'updated_at')
+    list_display = ('pk', 'news_heading', 'attachement_titles', 'attachement_urls', 'created_at', 'updated_at')
     list_filter = ['news_heading', 'created_at']
+    search_fields = ['infos']
 
 # NewsHeadingの表示
 class NewsHeadingAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'short_name', 'news_heading_code', 'color_code', 'updated_at')
 
     fieldsets = [
-        (None, {'fields': ['name', 'news_heading_code', 'color_code']}),
+        (None, {'fields': ['name', 'news_heading_code', 'color_code', 'field_names']}),
     ]
     inlines = [NewsInline]
 

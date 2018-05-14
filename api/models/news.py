@@ -20,7 +20,6 @@ class News(models.Model):
     def __str__(self):
         return f"news_heading: {self.news_heading}\nurl_params: {self.url_params}"
 
-
     # あるNewsHeadingに属するものだけ取得
     def filter_by_news_heading_code(news_heading_code):
         return News.objects.filter(news_heading__news_heading_code__contains=news_heading_code)
@@ -28,15 +27,15 @@ class News(models.Model):
     def get_most_recent_filtered_news(news_heading_code):
         return News.filter_by_news_heading_code(news_heading_code).reverse().first()
 
-    # 各種モデル上の情報をデコードする関数
+    # 各種モデル上の情報をデコードする関数 filterをかけることで空文字を返り値のリストから削除
     def decode_infos(self):
-        return self.infos.split(YOKE_CODE)
+        return filter(lambda x: bool(x), self.infos.split(YOKE_CODE))
 
     def decode_attachement_titles(self):
-        return self.attachement_titles.split(YOKE_CODE)
+        return filter(lambda x: bool(x), self.attachement_titles.split(YOKE_CODE))
 
     def decode_attachement_urls(self):
-        return self.attachement_urls.split(YOKE_CODE)
+        return filter(lambda x: bool(x), self.attachement_urls.split(YOKE_CODE))
 
     # saveのオーバーライド
     # Newsがsaveされた場合そのNewsの親となるNewsHeadingのupdated_atを更新させたいため

@@ -111,6 +111,13 @@ class Syllabus(models.Model):
         else:
             return None
 
+    # 学科名でfilter
+    def filter_by_department(department_name):
+        if department_name is not None:
+            return Syllabus.objects.filter(academic_credit_infos__contains=department_name)
+        else:
+            return None
+
     # dayコードをDB検索用の文字列に変換
     def convert_day(day_code):
         return next(v for k,v in Syllabus._day_list if re.match(k, day_code))
