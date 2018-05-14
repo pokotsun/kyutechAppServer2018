@@ -9,11 +9,11 @@ from ..const import SCRAPE_NEWS_URL
 class NewsSerializer(serializers.ModelSerializer):
     news_heading = NewsHeadingSerializer()
     infos = serializers.SerializerMethodField()
-    attachement_infos = serializers.SerializerMethodField()
+    attachment_infos = serializers.SerializerMethodField()
 
     class Meta:
         model = News
-        fields = ('id', 'news_heading', 'infos', 'attachement_infos')
+        fields = ('id', 'news_heading', 'infos', 'attachment_infos')
 
     def get_infos(self, obj):
         field_names = obj.news_heading.decode_field_names()
@@ -24,10 +24,10 @@ class NewsSerializer(serializers.ModelSerializer):
 
         return rtn
 
-    def get_attachement_infos(self, obj):
-        field_names = obj.news_heading.get_attachement_field_names()
-        attachment_titles = obj.decode_attachement_titles()
-        attachment_urls = obj.decode_attachement_urls()
+    def get_attachment_infos(self, obj):
+        field_names = obj.news_heading.get_attachment_field_names()
+        attachment_titles = obj.decode_attachment_titles()
+        attachment_urls = obj.decode_attachment_urls()
 
         rtn = [] #初期化
         for (field_name, link_name, url) in zip(field_names, attachment_titles, attachment_urls):

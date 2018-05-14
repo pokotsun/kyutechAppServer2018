@@ -58,12 +58,12 @@ def scrape_news(news_url_params, news_heading_code):
 
     # 初期化
     info_text = ""
-    attachement_titles = ""
-    attachement_urls = ""
+    attachment_titles = ""
+    attachment_urls = ""
 
     news_column_count = news_heading.field_count()
     field_names = news_heading.decode_field_names()
-    field_names.extend(news_heading.get_attachement_field_names())
+    field_names.extend(news_heading.get_attachment_field_names())
 
     print(f"{len(info_tags)}, {news_column_count}")
     #if len(info_tags) == news_column_count:
@@ -81,8 +81,8 @@ def scrape_news(news_url_params, news_heading_code):
                 print(f"{field_name} : {tt.string}")
         elif info_tag.a is not None:
             a = info_tag.a
-            attachement_titles += f"{a.string}{YOKE_CODE}"
-            attachement_urls += f"{a.get('href')}{YOKE_CODE}"
+            attachment_titles += f"{a.string}{YOKE_CODE}"
+            attachment_urls += f"{a.get('href')}{YOKE_CODE}"
             print(f"{field_name} : title: {a.string}\nhref: {a.get('href')}")
         elif info_tag.string is not None:
             info_text += info_tag.string
@@ -95,14 +95,14 @@ def scrape_news(news_url_params, news_heading_code):
 
     # 各種テキストの末尾のYOKE_CODEを取り除く
     info_text = remove_last_yoke(info_text)
-    attachement_titles = remove_last_yoke(attachement_titles)
-    attachement_urls = remove_last_yoke(attachement_urls)
+    attachment_titles = remove_last_yoke(attachment_titles)
+    attachment_urls = remove_last_yoke(attachment_urls)
 
-    print(f"info_text: {info_text}\n\natache_titles: {attachement_titles}\n\nattache_urls: {attachement_urls}")
+    print(f"info_text: {info_text}\n\natache_titles: {attachment_titles}\n\nattache_urls: {attachment_urls}")
 
     return News(
     news_heading = news_heading,
     infos=info_text,
-    attachement_titles=attachement_titles,
-    attachement_urls=attachement_urls,
+    attachment_titles=attachment_titles,
+    attachment_urls=attachment_urls,
     url_params=news_url_params)

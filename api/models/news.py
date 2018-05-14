@@ -11,8 +11,8 @@ class News(models.Model):
 
     news_heading = models.ForeignKey(NewsHeading, on_delete=models.CASCADE)
     infos = models.CharField(max_length=10000)
-    attachement_titles = models.CharField(max_length=10000, null=True)
-    attachement_urls = models.CharField(max_length=10000, null=True)
+    attachment_titles = models.CharField(max_length=10000, null=True)
+    attachment_urls = models.CharField(max_length=10000, null=True)
     url_params = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -31,11 +31,11 @@ class News(models.Model):
     def decode_infos(self):
         return filter(lambda x: bool(x), self.infos.split(YOKE_CODE))
 
-    def decode_attachement_titles(self):
-        return filter(lambda x: bool(x), self.attachement_titles.split(YOKE_CODE))
+    def decode_attachment_titles(self):
+        return filter(lambda x: bool(x), self.attachment_titles.split(YOKE_CODE))
 
-    def decode_attachement_urls(self):
-        return filter(lambda x: bool(x), self.attachement_urls.split(YOKE_CODE))
+    def decode_attachment_urls(self):
+        return filter(lambda x: bool(x), self.attachment_urls.split(YOKE_CODE))
 
     # saveのオーバーライド
     # Newsがsaveされた場合そのNewsの親となるNewsHeadingのupdated_atを更新させたいため

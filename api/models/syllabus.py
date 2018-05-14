@@ -68,10 +68,8 @@ class Syllabus(models.Model):
         elif label in "【講義室】":
             self.target_place = value
         elif label in "【更新日】":
-            # date_info = list(map(lambda x: int(x), value.split(",")[0].split("/")))
             date_info = [int(x) for x in value.split()[0].split("/")]
             self.published_date = datetime(date_info[0], date_info[1], date_info[2])
-
         elif label in "授業の概要":
             self.abstract = value
         elif label in "カリキュラムにおけるこの授業の位置付け" or label in "カリキュラムにおけるこの授業の位置づけ":

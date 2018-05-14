@@ -12,7 +12,7 @@ class NewsInline(admin.TabularInline):
 
 # Newsの表示
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'news_heading', 'attachement_titles', 'attachement_urls', 'created_at', 'updated_at')
+    list_display = ('pk', 'news_heading', 'attachment_titles', 'attachment_urls', 'created_at', 'updated_at')
     list_filter = ['news_heading', 'created_at']
     search_fields = ['infos']
 

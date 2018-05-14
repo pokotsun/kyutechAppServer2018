@@ -36,7 +36,7 @@ class NewsScrapeTests(TestCase):
             short_name="呼",
             name="学生呼出",
             field_names="件名|%&%|注記|%&%|対象学科等|%&%|対象学年|%&%|内容|%&%|特記|%&%|日付|%&%|終了",
-            attachement_count = 5,
+            attachment_count = 5,
             news_heading_code=393,
             color_code="#FFFFFF")
             news_heading.save()
@@ -45,4 +45,4 @@ class NewsScrapeTests(TestCase):
             "db.cgi?page=DBRecord&did=393&qid=all&vid=24&rid=123&head=22&hid=206&sid=n&fvid=132#dz_navigation>",
             393
             )
-            self.assertEqual(news.attachement_titles, "")
+            self.assertEqual(news.attachment_titles, "")

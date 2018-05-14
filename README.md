@@ -48,7 +48,7 @@
 | Name              | Type        | Description                      | Example                   |
 |-------------------|-------------|----------------------------------|---------------------------|
 | infos             | object      | 各種情報が入れ子となっている     | "infos": {,,,}            |
-| attachement_infos | object      | 添付資料の情報が入れ異なっている | "attachement_infos: {,,,} |
+| attachment_infos | object      | 添付資料の情報が入れ異なっている | "attachment_infos: {,,,} |
 
 #### infosの説明
 infosの中では各情報のタイトルと内容を含むobjectがlistとなって格納されています。
@@ -61,9 +61,9 @@ infosの中では各情報のタイトルと内容を含むobjectがlistとな�
 | content | string | titleの内容                        | 学生呼出 |
 
 
-#### attachement_infosの説明
-attachement_infosの中では各添付資料の資料番号(添付資料2など)と内容がひとつのobjectとなっています。
-以下の3つの要素がひとつのattachement_infoを形成しています。
+#### attachment_infosの説明
+attachment_infosの中では各添付資料の資料番号(添付資料2など)と内容がひとつのobjectとなっています。
+以下の3つの要素がひとつのattachment_infoを形成しています。
 
 | Name      | Type   | Description                        | Example                |
 |-----------|--------|------------------------------------|------------------------|
@@ -283,7 +283,7 @@ codeとしてはNewsHeading一覧から取得した `news_heading_code` を使�
                 "変更後": "1101講義室",
                 "内容": ""
             },
-            "attachement_infos": {
+            "attachment_infos": {
                 "添付資料(1)": {
                     "title": "講義室変更.pdf",
                     "url": "https://aiueo/a.pdf"

@@ -13,7 +13,7 @@ def initialize_news_heading():
         short_name=info["short_name"],
         name=info["name"],
         field_names=YOKE_CODE.join(info["fields"]),
-        attachement_count = info["attachement_num"],
+        attachment_count = info["attachment_num"],
         news_heading_code=info["news_heading_code"],
         color_code=info["color_code"])
 
