@@ -13,16 +13,16 @@ class UserScheduleViewSet(viewsets.ModelViewSet):
 
     # 以下RestFrameworkでdefaultで用意されているURLをpassすることで無効化
     # 一覧表示は必要ないため用意しない
-    # def list(self, request):
-    #     pass
+    def list(self, request):
+        pass
 
     # 詳細表示は必要ないため用意しない
-    # def retrieve(self, request, pk=None):
-    #     pass
-    #
+    def retrieve(self, request, pk=None):
+        pass
+
     # def update(self, request, pk=None):
     #     pass
-    #
+
     # def partial_update(self, request, pk=None):
     #     pass
 
