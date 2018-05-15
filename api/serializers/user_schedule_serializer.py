@@ -6,14 +6,14 @@ from ..serializers.user_serializer import UserSerializer
 class UserScheduleSerializer(serializers.ModelSerializer):
     # postの時はuser_idのみ、 getの時はuser情報すべてを渡せるようにする
     user_id = serializers.PrimaryKeyRelatedField(source='user',  queryset=User.objects.all(), write_only=True)
-    user = UserSerializer(read_only=True)
+    # user = UserSerializer(read_only=True)
 
     syllabus_id = serializers.PrimaryKeyRelatedField(source='syllabus', queryset=Syllabus.objects.all(), write_only=True)
     syllabus = SyllabusSerializer(read_only=True)
 
     class Meta:
         model = UserSchedule
-        fields = ('user_id', 'user', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter', 'memo', 'late_num', 'absent_num')
+        fields = ('user_id', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter', 'memo', 'late_num', 'absent_num')
 
     def get_user(self, obj):
         return UserSerializer()

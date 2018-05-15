@@ -117,16 +117,26 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 |-------------|------|------------------------------------------------------------------------------------|---------|
 | pk          | int  | primary Key                                                                        | 1       |
 | school_year | int  | 学年を表す。0: 1年, 1: 2年, 2: 3年, 3: 4年というふうに一つ数字がずれているので注意 | 2       |
-| department  | int  | どの学科に属するかを示す。数字がどこに対応するかは下表にて記す。                   | 23      |
+| department  | int  | どの学科に属するかを示す。数字がどこに対応するかは下表にて記す。                   | 203     | 
 
 #### departmentの対応表
-| departmentの値 | 対応学科                       |
-|----------------|--------------------------------|
-| 21             | 情報工学部　知能情報工学科     |
-| 22             | 情報工学部　情報・通信工学科   |
-| 23             | 情報工学部　知的システム工学科 |
-| 24             | 情報工学部　物理情報工学科     |
-| 25             | 情報工学部　生命情報工学科     |
+| departmentの値 | 対応学科                                                           |
+|----------------|--------------------------------------------------------------------|
+| 200            | 情報工学部　情工１類　Ⅰクラス                                     |
+| 201            | 情報工学部　情工１類　Ⅱクラス                                     |
+| 202            | 情報工学部　情工２類　Ⅲクラス                                     |
+| 203            | 情報工学部　情工３類　Ⅳクラス                                     |
+| 204            | 情報工学部　情工３類　Ⅴクラス                                     |
+| 205            | 情報工学部　知能情報工学科                                         |
+| 206            | 情報工学部　知能情報工学科　知能情報工学科（編入）                 |
+| 207            | 情報工学部　電磁情報工学科                                         |
+| 208            | 情報工学部　電子情報工学科　電子情報工学科（編入）                 |
+| 209            | 情報工学部　システム創成情報工学科　システム創成情報工学科         |
+| 210            | 情報工学部　システム創成情報工学科　システム創成情報工学科（編入） |
+| 211            | 情報工学部　機械情報工学科　機械情報工学科                         |
+| 212            | 情報工学部　機械情報工学科　機械情報工学科（編入）                 |
+| 213            | 情報工学部　生命情報工学科　生命情報工学科                         |
+| 214            | 情報工学部　生命情報工学科　生命情報工学科（編入）                 |
 
 
 ### 1.5 UserSchedule
@@ -160,6 +170,7 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 | `/users/`                                                       | PUT         | ユーザーの更新                                        | json              | json          |
 | `/users/<int:user_id>/`                                         | GET         | ユーザー詳細取得                                      | json              | json          |
 | `/news-headings/`                                               | GET         | Newsの見出し一覧                                      | None              | json          |
+| `/news/`                                                        | GET         | Newsの一覧                                            | None              | json          |
 | `/news/code-<int: code>`                                        | GET         | あるNewsHeadingに紐付いたNewsの一覧取得               | None              | json          |
 | `/syllabuses/`                                                  | GET         | 授業情報一覧、膨大なデータ量なので基本使っちゃダメ    | None              | json          |
 | `syllabuses/<int:syllabus_id>`                                  | GET         | シラバス詳細取得                                      | None              | json          |
@@ -168,6 +179,23 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 | `/user-schedules/<int: user-schedule-id>`                       | PUT         | ユーザーの時間割情報の更新                            | json              | json          |
 | `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>` | GET         | あるユーザーが設定したnクオーターにおける時間割の取得 | None              | json          |
 
+
+**注釈**: リスポンスのjsonの形として一度に取得できるデータのリクエスト数を100までに限っています。
+
+また、100件以降のリクエストに関しては101件から200件目までを取得するリクエストのurlを用意することで表現されます。
+よってリスト取得型のGETリクエストのリスポンスjsonは以下のような形となり、
+
+    {
+        "count": 182, 
+        "next": http://localhost:8000/api/syllabuses/?limit=100&offset=100,
+        ""previous: null,
+        "results": [ 
+            以下省略
+        ]
+    }
+
+
+ここで下記に書いてある`Response json`以下はresultの中身を表しています。
 
 ### 2.2 Details Of API
 
@@ -256,7 +284,41 @@ Newsの見出し情報を一覧取得します。
         ,,,(以下省略)
     ]
 
-#### 2.2.5 GET `/news/code-<int: news_heading_code>/`
+#### 2.2.5 GET `/news/`
+News情報のすべてを一覧取得します.
+
+    HTTP/1.1 200
+
+    Content-Type : application/json
+
+    Response json:
+    [
+        {
+            "news_heading": 86,
+            "infos": {
+                "タイトル": "講義室変更",
+                "科目名": "授業A",
+                "教員名": "山田先生",
+                "対象学科": "大学院",
+                "対象学年": "大学院",
+                "日付": "2018年5月31日",
+                "時限": "2限",
+                "種別": "変更日時以降",
+                "変更前": "E106講義室",
+                "変更後": "1101講義室",
+                "内容": ""
+            },
+            "attachment_infos": {
+                "添付資料(1)": {
+                    "title": "講義室変更.pdf",
+                    "url": "https://aiueo/a.pdf"
+                }
+            }
+        },
+        ,,,(省略)
+    ]
+
+#### 2.2.6 GET `/news/code-<int: news_heading_code>/`
 あるNewsHeadingに紐付いたNews情報を一覧取得します.
 codeとしてはNewsHeading一覧から取得した `news_heading_code` を使用します.
 
@@ -293,7 +355,7 @@ codeとしてはNewsHeading一覧から取得した `news_heading_code` を使�
         ,,,(省略)
     ]
 
-#### 2.2.6 GET `/syllabuses/`
+#### 2.2.7 GET `/syllabuses/`
 情報工学部のシラバスの情報を一覧取得します。授業情報をすべて取得するため、
 動きが重い。用意したが使わないのが無難。
 
@@ -355,7 +417,7 @@ codeとしてはNewsHeading一覧から取得した `news_heading_code` を使�
         ,,,(省略)
     ]
 
-#### 2.2.7 GET `/syllabuses/<int: syllabus_id>`
+#### 2.2.8 GET `/syllabuses/<int: syllabus_id>`
 primary key = syllabus_id であるsyllabusを取得する
 
 余り使わないと思う
@@ -418,7 +480,7 @@ primary key = syllabus_id であるsyllabusを取得する
         }
 
 
-#### 2.2.8 GET `/syllabuses/day-<str: day>/period-<int:period>/`
+#### 2.2.9 GET `/syllabuses/day-<str: day>/period-<int:period>/`
 ある曜日、ある時限において開講されている授業を一覧取得します.
 
 dayの対応表を以下に示す。
@@ -441,7 +503,7 @@ periodについては(period + 1)限目を取得する。
 
 取得するデータの構成は **2.2.6 GET /syllabuses/** とおなじため省略。
 
-#### 2.2.9 POST `/user-schedules/`
+#### 2.2.10 POST `/user-schedules/`
 ユーザーが設定した時間割のある1コマの情報を登録します。
 
 dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してします。
@@ -469,9 +531,6 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
 
     Response json:
     {
-        "user": {
-            /users/ と同等
-        },
         "syllabus": {
             /syllabuses/ と同等
         },
@@ -483,14 +542,14 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
         "absent_num": 0
     }
 
-#### 2.2.10 PUT `/user-schedules/<int: user-schedule-id>`
+#### 2.2.11 PUT `/user-schedules/<int: user-schedule-id>`
 ユーザーの時間割情報を更新します。primary keyが`user-schedule-id`のUserSchedule情報を更新します。
 
 基本的な情報については `2.2.9 POST /user-schedules/` に準拠します。
 
 リクエストのタイプは`2.2.9`における **Response json** と同じになっています。
- 
-#### 2.2.11  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
+
+#### 2.2.12  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
 あるユーザーのnクオーターにおける時間割を返します。
 
 UserScheduleオブジェクトのリストとして表現しています。
@@ -505,15 +564,15 @@ quarter_idは 0 ~ 3までの数字であり、(quarter_id + 1)クオーターと
     Response json:
     [
         {
-            "user": {
-                /users/ と同等
-            },
             "syllabus": {
                 /syllabuses/ と同等
             },
             "day": 0,
             "period": 3,
             "quarter": 0
+            "memo": "",
+            "late_num": 0,
+            "absent_num": 0
         },
         ,,,(省略)
     ]
@@ -524,7 +583,7 @@ quarter_idは 0 ~ 3までの数字であり、(quarter_id + 1)クオーターと
 - Python 3.6.3
 
 - module類
-# 
+#
     beautifulsoup4==4.6.0
     Django==2.0.4
     django-extensions==2.0.6

@@ -39,7 +39,7 @@ class User(models.Model):
         (DEPARTMENT_JOKO35, "情報工学部　情工３類　Ⅴクラス"),
         (DEPARTMENT_JOHO_TINO, "情報工学部　知能情報工学科"),
         (DEPARTMENT_JOHO_TINO_HENNYU, "情報工学部　知能情報工学科　知能情報工学科（編入）"),
-        (DEPARTMENT_JOHO_TSUSHIN, "情報工学部　情報・通信工学科"),
+        (DEPARTMENT_JOHO_TSUSHIN, "情報工学部　電子情報工学科"),
         (DEPARTMENT_JOHO_TSUSHIN_HENNYU, "情報工学部　電子情報工学科　電子情報工学科（編入）"),
         (DEPARTMENT_JOHO_SYSTEM, "情報工学部　システム創成情報工学科　システム創成情報工学科"),
         (DEPARTMENT_JOHO_SYSTEM_HENNYU, "情報工学部　システム創成情報工学科　システム創成情報工学科（編入）"),
