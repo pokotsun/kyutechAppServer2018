@@ -1,6 +1,7 @@
 from django.db import models
-from ..const import YOKE_CODE
+from ..const import YOKE_CODE, SCRAPE_NEWS_URL
 from api.models.news_heading import NewsHeading
+import re
 
 # Create your models here.
 
@@ -35,7 +36,9 @@ class News(models.Model):
         return filter(lambda x: bool(x), self.attachment_titles.split(YOKE_CODE))
 
     def decode_attachment_urls(self):
-        return filter(lambda x: bool(x), self.attachment_urls.split(YOKE_CODE))
+        return map(lambda x: x if re.match("http(s)?://.*", x) else f"{SCRAPE_NEWS_URL}{x}", 
+            filter(lambda x: bool(x), self.attachment_urls.split(YOKE_CODE))
+        )
 
     # saveのオーバーライド
     # Newsがsaveされた場合そのNewsの親となるNewsHeadingのupdated_atを更新させたいため
