@@ -7,13 +7,13 @@ from ..models import News
 from ..const import SCRAPE_NEWS_URL
 
 class NewsSerializer(serializers.ModelSerializer):
-    news_heading = NewsHeadingSerializer()
+    # news_heading = NewsHeadingSerializer()
     infos = serializers.SerializerMethodField()
     attachment_infos = serializers.SerializerMethodField()
 
     class Meta:
         model = News
-        fields = ('id', 'news_heading', 'infos', 'attachment_infos')
+        fields = ('id', 'infos', 'attachment_infos')
 
     def get_infos(self, obj):
         field_names = obj.news_heading.decode_field_names()

@@ -5,5 +5,5 @@ from ..models import NewsHeading
 from ..serializers import NewsHeadingSerializer
 
 class NewsHeadingViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = NewsHeading.objects.all()
+    queryset = NewsHeading.objects.all().order_by('pk')
     serializer_class = NewsHeadingSerializer
