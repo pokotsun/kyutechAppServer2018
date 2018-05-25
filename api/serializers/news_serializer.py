@@ -10,12 +10,16 @@ class NewsSerializer(serializers.ModelSerializer):
     # news_heading = NewsHeadingSerializer()
     infos = serializers.SerializerMethodField()
     attachment_infos = serializers.SerializerMethodField()
+    news_heading_code = serializers.SerializerMethodField()
     source_url = serializers.SerializerMethodField()
+    
 
     class Meta:
         model = News
-        fields = ('id', 'source_url', 'infos', 'attachment_infos')
+        fields = ('id', 'news_heading_code', 'source_url', 'infos', 'attachment_infos')
 
+    def get_news_heading_code(self, obj):
+        return obj.news_heading.news_heading_code
     def get_source_url(self, obj):
         return f"{SCRAPE_NEWS_URL}{obj.url_params}" 
 
