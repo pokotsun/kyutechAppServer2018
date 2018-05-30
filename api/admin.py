@@ -18,7 +18,7 @@ class NewsAdmin(admin.ModelAdmin):
 
 # NewsHeadingの表示
 class NewsHeadingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'short_name', 'news_heading_code', 'color_code', 'updated_at')
+    list_display = ('pk', 'name', 'short_name', 'news_heading_code', 'color_code', 'updated_at')
 
     fieldsets = [
         (None, {'fields': ['name', 'news_heading_code', 'color_code', 'field_names']}),
@@ -32,8 +32,8 @@ class SyllabusAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('school_year', 'department')
-    list_filter = ['school_year']
+    list_display = ('pk', 'school_year', 'department')
+    list_filter = ['school_year', 'department']
 
 
 class UserScheduleAdmin(admin.ModelAdmin):
