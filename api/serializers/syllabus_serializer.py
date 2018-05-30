@@ -9,9 +9,9 @@ class SyllabusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Syllabus
         fields = (
-            "title", "subject_code", "teacher_name", "target_participants_infos",
+            "id", "title", "subject_code", "teacher_name", "target_participants_infos",
             "target_school_year", "target_term", "class_number", "target_period",
-            "published_date", "abstract", "positioning", "lecture_content",
+            "target_place", "published_date", "abstract", "positioning", "lecture_content",
             "lecture_processing", "performance_target", "valuation_basis",
             "instruction_out_learning", "keywords", "text_books", "study_aid_books",
             "notes", "professor_email", 'academic_credit_infos',
