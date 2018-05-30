@@ -33,6 +33,8 @@ class UserScheduleSerializer(serializers.ModelSerializer):
             is_valid = True,
         )
 
+        print(f"new_schedule: {new_schedule}")
+
         past_schedules = UserSchedule.objects.filter(
             user = new_schedule.user,
             day = new_schedule.day,
