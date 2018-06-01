@@ -13,7 +13,7 @@ class UserScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSchedule
-        fields = ('user_id', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter', 'memo', 'late_num', 'absent_num')
+        fields = ('id', 'user_id', 'syllabus_id', 'syllabus', 'day', 'period', 'quarter', 'memo', 'late_num', 'absent_num')
 
     def get_user(self, obj):
         return UserSerializer()
