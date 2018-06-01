@@ -3,7 +3,7 @@ import api.const as const
 
 # ユーザーモデル
 class User(models.Model):
-    SCHOOL_FIRST = 1
+    SCHOOL_FIRST = 1 
     SCHOOL_SECOND = 2
     SCHOOL_THIRD = 3
     SCHOOL_FOURTH = 4

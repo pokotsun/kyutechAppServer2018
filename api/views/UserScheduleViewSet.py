@@ -26,8 +26,8 @@ class UserScheduleViewSet(viewsets.ModelViewSet):
     # def partial_update(self, request, pk=None):
     #     pass
 
-    def destroy(self, request, pk=None):
-        pass
+    # def destroy(self, request, pk=None):
+    #     pass
 
 
 # フィルタリングされたUserScheduleを表示する
