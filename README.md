@@ -45,13 +45,13 @@
 お知らせを表すモデル
 
 #### Column
-| Name              | Type        | Description                      | Example                   |
-|-------------------|-------------|----------------------------------|---------------------------|
-| id   |  int | newsのid  |  3 |
-| news_heading_code | int| 対象のNewsの親となるNewsHeadingのid | 4|
-| infos             | object      | 各種情報が入れ子となっている     | "infos": {,,,}            |
-| attachment_infos | object      | 添付資料の情報が入れ異なっている | "attachment_infos: {,,,} |
 
+| Name              | Type   | Description                         | Example                  |
+|-------------------|--------|-------------------------------------|--------------------------|
+| id                | int    | newsのid                            | 3                        |
+| news_heading_code | int    | 対象のNewsの親となるNewsHeadingのid | 4                        |
+| infos             | object | 各種情報が入れ子となっている        | "infos": {,,,}           |
+| attachment_infos  | object | 添付資料の情報が入れ異なっている    | "attachment_infos: {,,,} |
 #### infosの説明
 infosの中では各情報のタイトルと内容を含むobjectがlistとなって格納されています。
 
@@ -77,30 +77,31 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 授業情報を表すモデル
 
 #### Column
-| Name                      | Type   | Description                                                                        | Example                          |
-|---------------------------|--------|------------------------------------------------------------------------------------|----------------------------------|
-|id   | int  | primary key  | 1357  |
-| title                     | string | 授業名                                                                             | 解析Ⅰ                           |
-| subject_code              | int    | 授業に割り当てられているコード番号。ほぼ使うことはないでしょう。                   | 11003000                         |
-| teacher_name              | string | この授業の講師の名前。複数人いる場合もある。                                       | 山田花子                         |
-| target_participants_infos | object | 授業対象者の主に単位に関する情報を一覧表示する。                                   | target_participants_infos: {,,,} |
-| target_school_year        | string | 対象学年                                                                           | 1, 3年                           |
-| class_number              | int    | それぞれの授業に割り振られている番号。同じ授業を複数人で扱っている際に使用される。 | 1                                |
-| target_period             | string | 授業の開講される日にち、時間帯                                                     | 火曜3限,木曜3限                  |
-|| target_place   |  string  | 授業の開講される場所  |  (情)1304講義室,(情)1304講義室 |
-| published_date            | date   | シラバス情報の更新された日にち                                                     | 2018/02/22 00:00                 |
-| abstract                  | string | 授業概要                                                                           | 長いので省略                     |
-| positioning               | string | 授業の位置づけ                                                                     | 長いので省略                     |
-| lecture_content           | string | 授業の進行予定                                                                     | 長いので省略                     |
-| lecture_processing        | string | 授業の進行方針                                                                     | 長いので省略                     |
-| performance_target        | string | この授業を学んで何が得られるか                                                     | 長いので省略                     |
-| valuation_basis           | string | 点数評価の対象                                                                     | 長いので省略                     |
-| instruction_out_learning  | string | 授業外ですべきこと、書いてないことが多い。                                         | 長いので省略                     |
-| keywords                  | string | 授業に関連するキーワード                                                           | 長いので省略                     |
-| text_books                | string | 授業で使う教科書の名前                                                             | 長いので省略                     |
-| study_aid_books           | string | 授業で必要になるかもしれない参考書の名前                                           | 長いので省略                     |
-| notes                     | string | 備考, ほぼ書かれてない                                                             | 長いので省略                     |
-| professor_email           | string | 担当教授のメアド                                                                   | aiueo@aiueo.com                  |
+
+| Name                      | Type         | Description                                                                        | Example                          |                               |
+|---------------------------|--------------|------------------------------------------------------------------------------------|----------------------------------|-------------------------------|
+| id                        | int          | primary key                                                                        | 1357                             |                               |
+| title                     | string       | 授業名                                                                             | 解析Ⅰ                            |                               |
+| subject_code              | int          | 授業に割り当てられているコード番号。ほぼ使うことはないでしょう。                   | 11003000                         |                               |
+| teacher_name              | string       | この授業の講師の名前。複数人いる場合もある。                                       | 山田花子                         |                               |
+| target_participants_infos | object       | 授業対象者の主に単位に関する情報を一覧表示する。                                   | target_participants_infos: {,,,} |                               |
+| target_school_year        | string       | 対象学年                                                                           | 1, 3年                           |                               |
+| class_number              | int          | それぞれの授業に割り振られている番号。同じ授業を複数人で扱っている際に使用される。 | 1                                |                               |
+| target_period             | string       | 授業の開講される日にち、時間帯                                                     | 火曜3限,木曜3限                  |                               |
+|                           | target_place | string                                                                             | 授業の開講される場所             | (情)1304講義室,(情)1304講義室 |
+| published_date            | date         | シラバス情報の更新された日にち                                                     | 2018/02/22 00:00                 |                               |
+| abstract                  | string       | 授業概要                                                                           | 長いので省略                     |                               |
+| positioning               | string       | 授業の位置づけ                                                                     | 長いので省略                     |                               |
+| lecture_content           | string       | 授業の進行予定                                                                     | 長いので省略                     |                               |
+| lecture_processing        | string       | 授業の進行方針                                                                     | 長いので省略                     |                               |
+| performance_target        | string       | この授業を学んで何が得られるか                                                     | 長いので省略                     |                               |
+| valuation_basis           | string       | 点数評価の対象                                                                     | 長いので省略                     |                               |
+| instruction_out_learning  | string       | 授業外ですべきこと、書いてないことが多い。                                         | 長いので省略                     |                               |
+| keywords                  | string       | 授業に関連するキーワード                                                           | 長いので省略                     |                               |
+| text_books                | string       | 授業で使う教科書の名前                                                             | 長いので省略                     |                               |
+| study_aid_books           | string       | 授業で必要になるかもしれない参考書の名前                                           | 長いので省略                     |                               |
+| notes                     | string       | 備考, ほぼ書かれてない                                                             | 長いので省略                     |                               |
+| professor_email           | string       | 担当教授のメアド                                                                   | aiueo@aiueo.com                  |                               |
 
 #### target_participants_infosの説明
 このobjectのリスト内では対象学生に対して割り当てられている要習得単位数や単位の種類が書かれています。
@@ -108,7 +109,7 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 以下の3つの要素がひとつのobjectを形成しています。
 
 | Name                 | Type   | Description                                                            | Example                                            |
-| ------               | ------ | -------------                                                          | ---------                                          |
+|----------------------|--------|------------------------------------------------------------------------|----------------------------------------------------|
 | target_participants  | string | 対象学生の所属学科名                                                   | 情報工学部　知能情報工学科　知能情報工学科（編入） |
 | academic_credit_kind | string | 対象学科においてこの授業がどのような扱いの単位なのかを示す             | 査定外                                             |
 | academic_credit_num  | float  | 対象学科においてこの授業を履修することでいくつ単位をもらえるのかを示す | 0.0                                                |
@@ -117,13 +118,15 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 利用ユーザーを表します
 
 #### Column
+
 | Name        | Type | Description                                                                        | Example |
 |-------------|------|------------------------------------------------------------------------------------|---------|
-| pk          | int  | primary Key                                                                        | 1       |
+| id          | int  | primary Key                                                                        | 1       |
 | school_year | int  | 学年を表す。0: 1年, 1: 2年, 2: 3年, 3: 4年というふうに一つ数字がずれているので注意 | 2       |
 | department  | int  | どの学科に属するかを示す。数字がどこに対応するかは下表にて記す。                   | 203     |
 
 #### departmentの対応表
+
 | departmentの値 | 対応学科                                                           |
 |----------------|--------------------------------------------------------------------|
 | 200            | 情報工学部　情工１類　Ⅰクラス                                     |
@@ -149,8 +152,10 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 1データがあるユーザーの履修予定授業1コマを表します。
 
 #### Column
+
 | Name       | Type     | Description                                                                                                             | Example                  |
 |------------|----------|-------------------------------------------------------------------------------------------------------------------------|--------------------------|
+| id         | int      | primary key                                                                                                             | 3                        |
 | syllabus   | Syllabus | 履修教科を示す                                                                                                          | Syllabusの項を参照       |
 | day        | int      | 履修曜日を表す 0: Mon, 1: Tues, ,,, 4: Fri と言った感じ                                                                 | 3                        |
 | period     | int      | 履修時限を表す 0: 1限, 1: 2限, ,,, 4: 5限 と行った感じ                                                                  | 2                        |
@@ -158,7 +163,6 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 | memo       | string   | ユーザーが教科に対して残したメモ                                                                                        | 2/13レポート提出必要アリ |
 | late_num   | int      | 遅刻回数                                                                                                                | 3                        |
 | absent_num | int      | 欠席回数                                                                                                                | 4                        |
-
 
 ## 2. Explanation of URL
 ここではAPIにおいて使用できるエンドポイントを説明します。
@@ -180,9 +184,9 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 | `syllabuses/<int:syllabus_id>`                                  | GET         | シラバス詳細取得                                      | None              | json          |
 | `syllabuses/day-<int: day>/period-<int:period>`                 | GET         | ある日にち、時限におけるシラバス一覧取得              | None              | json          |
 | `/user-schedules/`                                              | POST        | ユーザーの時間割の作成                                | json              | json          |
+| `user-schedules/<int: user-schedule-id>`                        | DELETE      | ユーザーの設定したヒトコマを削除する                  | none              | json          |
 | `/user-schedules/<int: user-schedule-id>`                       | PUT         | ユーザーの時間割情報の更新                            | json              | json          |
 | `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>` | GET         | あるユーザーが設定したnクオーターにおける時間割の取得 | None              | json          |
-
 
 **注釈**: リスポンスのjsonの形として一度に取得できるデータのリクエスト数を100までに限っています。
 
@@ -546,14 +550,19 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
         "absent_num": 0
     }
 
-#### 2.2.11 PUT `/user-schedules/<int: user-schedule-id>`
+#### 2.2.11 DELETE `/user-schedules/<int: user-schedule-id>`
+ユーザーの時間割情報を削除します。 primary keyが`user-schedule-id`のUserSchedule情報を更新します。
+Bodyにjsonは必要ありません。
+削除が正常に完了した場合204が帰ってくるはずです。
+
+#### 2.2.12 PUT `/user-schedules/<int: user-schedule-id>`
 ユーザーの時間割情報を更新します。primary keyが`user-schedule-id`のUserSchedule情報を更新します。
 
 基本的な情報については `2.2.9 POST /user-schedules/` に準拠します。
 
 リクエストのタイプは`2.2.9`における **Response json** と同じになっています。
 
-#### 2.2.12  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
+#### 2.2.13  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
 あるユーザーのnクオーターにおける時間割を返します。
 
 UserScheduleオブジェクトのリストとして表現しています。

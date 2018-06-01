@@ -3,10 +3,10 @@ import api.const as const
 
 # ユーザーモデル
 class User(models.Model):
-    SCHOOL_FIRST = 1 
-    SCHOOL_SECOND = 2
-    SCHOOL_THIRD = 3
-    SCHOOL_FOURTH = 4
+    SCHOOL_FIRST = 0
+    SCHOOL_SECOND = 1
+    SCHOOL_THIRD = 2
+    SCHOOL_FOURTH = 3
 
     DEPARTMENT_JOKO11 = 200
     DEPARTMENT_JOKO12 = 201
