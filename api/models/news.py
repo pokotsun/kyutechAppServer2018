@@ -36,7 +36,7 @@ class News(models.Model):
         return filter(lambda x: bool(x), self.attachment_titles.split(YOKE_CODE))
 
     def decode_attachment_urls(self):
-        return map(lambda x: x if re.match("http(s)?://.*", x) or bool(re.match("[a-zA-Z0-9.!:#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:[a-zA-Z0-9-]+)*", x)) else f"{SCRAPE_NEWS_URL}{x}", 
+        return map(lambda x: x if re.match("http(s)?://.*", x) or bool(re.match("[a-zA-Z0-9.!:#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:[a-zA-Z0-9-]+)*", x)) else f"{SCRAPE_NEWS_URL}" + re.sub('db.cgi/.+?(\.pdf\?)', "db.cgi/?", x), 
             filter(lambda x: bool(x), self.attachment_urls.split(YOKE_CODE))
         )
 
