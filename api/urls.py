@@ -12,7 +12,7 @@ app_name = "api"
 
 urlpatterns = [
     path(r'news/code-<int:code>/', FilteredNewsViewSet.as_view()),
-    path(r'syllabuses/day-<str:day>/period-<int:period>', FilteredSyllabusViewSet.as_view()),
+    path(r'syllabuses/day-<str:day>/period-<int:period>/', FilteredSyllabusViewSet.as_view()),
     path(r'user-schedules/user-<int:user_id>/quarter-<int:quarter_id>/', FilteredUserScheduleViewSet.as_view())
 ]
 

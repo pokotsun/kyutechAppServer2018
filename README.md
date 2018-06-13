@@ -174,19 +174,19 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
 
 | EndPoint                                                        | HTTP Method | description                                           | request data_type | response_type |
 |-----------------------------------------------------------------|-------------|-------------------------------------------------------|-------------------|---------------|
-| `/users/`                                                       | POST        | ユーザーの作成                                        | json              | json          |
+| `/users/`                                           ごめんなさい            | POST        | ユーザーの作成                                        | json              | json          |
 | `/users/`                                                       | PUT         | ユーザーの更新                                        | json              | json          |
 | `/users/<int:user_id>/`                                         | GET         | ユーザー詳細取得                                      | json              | json          |
 | `/news-headings/`                                               | GET         | Newsの見出し一覧                                      | None              | json          |
 | `/news/`                                                        | GET         | Newsの一覧                                            | None              | json          |
 | `/news/code-<int: code>`                                        | GET         | あるNewsHeadingに紐付いたNewsの一覧取得               | None              | json          |
 | `/syllabuses/`                                                  | GET         | 授業情報一覧、膨大なデータ量なので基本使っちゃダメ    | None              | json          |
-| `syllabuses/<int:syllabus_id>`                                  | GET         | シラバス詳細取得                                      | None              | json          |
-| `syllabuses/day-<int: day>/period-<int:period>`                 | GET         | ある日にち、時限におけるシラバス一覧取得              | None              | json          |
+| `/syllabuses/<int:syllabus_id>`/                                  | GET         | シラバス詳細取得                                      | None              | json          |
+| `/syllabuses/day-<int: day>/period-<int:period>/`                 | GET         | ある日にち、時限におけるシラバス一覧取得              | None              | json          |
 | `/user-schedules/`                                              | POST        | ユーザーの時間割の作成                                | json              | json          |
-| `user-schedules/<int: user-schedule-id>`                        | DELETE      | ユーザーの設定したヒトコマを削除する                  | none              | json          |
-| `/user-schedules/<int: user-schedule-id>`                       | PUT         | ユーザーの時間割情報の更新                            | json              | json          |
-| `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>` | GET         | あるユーザーが設定したnクオーターにおける時間割の取得 | None              | json          |
+| `/user-schedules/<int: user-schedule-id>/`                        | DELETE      | ユーザーの設定したヒトコマを削除する                  | none              | json          |
+| `/user-schedules/<int: user-schedule-id>/`                       | PUT         | ユーザーの時間割情報の更新                            | json              | json          |
+| `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>/` | GET         | あるユーザーが設定したnクオーターにおける時間割の取得 | None              | json          |
 
 **注釈**: リスポンスのjsonの形として一度に取得できるデータのリクエスト数を100までに限っています。
 
@@ -255,7 +255,7 @@ attachment_infosの中では各添付資料の資料番号(添付資料2など)�
         "updated_at": "2018/05/02 16:24"
     }
 
-#### 2.2.3 GET `/users/<int:user_id>`
+#### 2.2.3 GET `/users/<int:user_id>/`
 ユーザーID = user_idのユーザーの情報を取得します。
 
     Example url : /api/users/5
@@ -425,7 +425,7 @@ codeとしてはNewsHeading一覧から取得した `news_heading_code` を使�
         ,,,(省略)
     ]
 
-#### 2.2.8 GET `/syllabuses/<int: syllabus_id>`
+#### 2.2.8 GET `/syllabuses/<int: syllabus_id>/`
 primary key = syllabus_id であるsyllabusを取得する
 
 余り使わないと思う
@@ -497,7 +497,7 @@ dayの対応表を以下に示す。
 |-----------|------|
 | monday    | 月曜 |
 | tuesday   | 火曜 |
-| wednesday | 水曜 |
+| wednesday | 水曜 |方も変えといて
 | thursday  | 木曜 |
 | friday    | 金曜 |
 
@@ -550,19 +550,19 @@ dayは0: 月曜, 1: 火曜, 2: 水曜, 3: 木曜, 4: 金曜に対応してしま
         "absent_num": 0
     }
 
-#### 2.2.11 DELETE `/user-schedules/<int: user-schedule-id>`
+#### 2.2.11 DELETE `/user-schedules/<int: user-schedule-id>`/
 ユーザーの時間割情報を削除します。 primary keyが`user-schedule-id`のUserSchedule情報を更新します。
 Bodyにjsonは必要ありません。
 削除が正常に完了した場合204が帰ってくるはずです。
 
-#### 2.2.12 PUT `/user-schedules/<int: user-schedule-id>`
+#### 2.2.12 PUT `/user-schedules/<int: user-schedule-id>/`
 ユーザーの時間割情報を更新します。primary keyが`user-schedule-id`のUserSchedule情報を更新します。
 
 基本的な情報については `2.2.9 POST /user-schedules/` に準拠します。
 
 リクエストのタイプは`2.2.9`における **Response json** と同じになっています。
 
-#### 2.2.13  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>`
+#### 2.2.13  GET `/user-schedules/user-<int: user_id>/quarter-<int: quarter_id>/`
 あるユーザーのnクオーターにおける時間割を返します。
 
 UserScheduleオブジェクトのリストとして表現しています。
