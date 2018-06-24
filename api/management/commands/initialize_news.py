@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
 from django.core.management.base import BaseCommand, CommandError
 from api.management.commands.lib.initialization import initialize_news, initialize_news_heading
+from api.models import NewsHeading
 
 class Command(BaseCommand):
 
@@ -14,5 +15,6 @@ class Command(BaseCommand):
 
     # # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
+        NewsHeading.objects.all().delete() # すでにあるNewsHeadingを全削除 同時にNewsも全削除される
         initialize_news_heading()
         initialize_news()

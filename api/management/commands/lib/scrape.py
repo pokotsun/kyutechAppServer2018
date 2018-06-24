@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import requests
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
 import re
@@ -27,7 +28,10 @@ def go_to_next_news(news):
 # スクレイピング先のURLからsoupを取得する
 def get_soup(url):
     try:
-        html = urllib.request.urlopen(url)
+        response = requests.get(url)
+        response.encoding = response.apparent_encoding
+        html = response.content
+        # html = urllib.request.urlopen(url)
     except urllib.error.HTTPError:
         print("404Not Found Errorの発生")
         return None
@@ -41,14 +45,13 @@ def remove_last_yoke(txt):
 
 # urlがnews_urlであるNewsの情報を取得する
 def scrape_news(news_url_params, news_heading_code):
-    #news_heading_code = re.search("[0-9]+",
-    #re.search("did=[0-9]+", news_url_params).group()).group()
 
     news_heading = NewsHeading.objects.get(
         news_heading_code=news_heading_code)
 
     scrape_url = f"{SCRAPE_NEWS_URL}{news_url_params}"
     print(f"scrape_url: {scrape_url}")
+
     # htmlをBeautifulSoupで扱う
     soup = get_soup(scrape_url)
 
@@ -98,7 +101,12 @@ def scrape_news(news_url_params, news_heading_code):
     attachment_titles = remove_last_yoke(attachment_titles)
     attachment_urls = remove_last_yoke(attachment_urls)
 
-    print(f"info_text: {info_text}\n\natache_titles: {attachment_titles}\n\nattache_urls: {attachment_urls}")
+    print(f"""
+    info_text: {info_text}
+
+    atache_titles: {attachment_titles}
+    
+    attache_urls: {attachment_urls}""")
 
     return News(
     news_heading = news_heading,
