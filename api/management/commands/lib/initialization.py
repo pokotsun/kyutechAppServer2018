@@ -23,6 +23,7 @@ def initialize_news_heading():
 
 # News情報の初期化
 def initialize_news():
+
     news_init_infos = NEWS_HEADING_INFOS
 
     for info in news_init_infos:
