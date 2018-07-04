@@ -39,6 +39,7 @@ class UserScheduleSerializer(serializers.ModelSerializer):
             user = new_schedule.user,
             day = new_schedule.day,
             period = new_schedule.period,
+            quarter = new_schedule.quarter,
             is_valid = True,
         ).order_by('updated_at').reverse()
 
