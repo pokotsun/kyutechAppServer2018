@@ -619,7 +619,7 @@ python 3.6.3, pip 9.0.3が入っている前提ですすめる。
 3. `python manage.py migrate`
 を実行してMigrationする
 
-4. `python manage.py initialize_news`
+4. `python manage.py init_news`
 を実行し、学生のお知らせ情報を取得する。
 
 5. `python manage.py initialize_syllabus`

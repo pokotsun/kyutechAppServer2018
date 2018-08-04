@@ -35,7 +35,7 @@ def get_soup(driver):
     data = driver.page_source.encode('utf-8')
     return BeautifulSoup(data, "html.parser")
 
-# テーブルの値を取得していく
+# テーブルの値を取得する
 def _get_table_contents(table_tag):
     tbody = table_tag.tbody
     if tbody is not None:
@@ -49,7 +49,6 @@ def _get_table_contents(table_tag):
 
 # シラバスの情報を取っていく
 def scrape_syllabus(soup):
-
     syllabus = Syllabus() # モデルの初期化
     subject_title = soup.find(class_="syllabus__subject-name")
     syllabus.set_title(subject_title.string)
