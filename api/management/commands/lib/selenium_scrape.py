@@ -12,7 +12,7 @@ from api.models import Syllabus
 from api.const import SCRAPE_SYLLABUS_URL
 
 # htmlの状態をシラバスが取れる状態までする ドライバーを返す
-def initialize_html_state():
+def init_html_state(scholor_code):
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
@@ -23,7 +23,7 @@ def initialize_html_state():
     print(driver.title) #=> 九州工業大学シラバス
     faculty_select = driver.find_element_by_id('belong_children_faculty') # selectboxエレメントをidから取得
     faculty_select_element = Select(faculty_select) # セレクトボックスを取得
-    faculty_select_element.select_by_value('278') # 情報工学部を選択
+    faculty_select_element.select_by_value(scholor_code) # 情報工学部を選択
 
     driver.find_element_by_class_name('js-simple-search-btn').click() # 検索ボタンをクリック
     sleep(10) # 検索ボタン結果が反映されるまで待つ
