@@ -7,6 +7,7 @@
 *.py[co]
 .tox/
 __pycache__
+.python-version
 MANIFEST
 dist/
 docs/_build/
