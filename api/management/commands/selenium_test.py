@@ -5,7 +5,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
-from api.management.commands.lib.selenium_scrape import initialize_html_state, get_soup, scrape_syllabus
+from api.management.commands.lib.selenium_scrape import init_html_state, get_soup, scrape_syllabus
 import re
 import random
 
@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     # # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
-        driver = initialize_html_state()
+        driver = init_html_state()
 
         # シラバス一覧の取得
         syllabus_links = driver.find_elements_by_class_name('js-syllabus-show-link')

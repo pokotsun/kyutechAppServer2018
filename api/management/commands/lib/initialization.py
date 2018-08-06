@@ -5,9 +5,10 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
-from api.management.commands.lib.selenium_scrape import initialize_html_state, get_soup, scrape_syllabus
+from api.management.commands.lib.selenium_scrape import init_html_state, get_soup, scrape_syllabus
 
-def initialize_news_heading():
+# NewsHeadingのデータを初期化する
+def init_news_heading():
     for info in NEWS_HEADING_INFOS:
         news_heading = NewsHeading(
         short_name=info["short_name"],
@@ -22,8 +23,7 @@ def initialize_news_heading():
     print("NewsHeadingの初期データの挿入に成功しました！")
 
 # News情報の初期化
-def initialize_news():
-
+def init_news():
     news_init_infos = NEWS_HEADING_INFOS
 
     for info in news_init_infos:
@@ -40,8 +40,13 @@ def initialize_news():
 
 # シラバス情報の初期化
 def initialize_syllabus():
-    driver = initialize_html_state()
+    save_syllabus_driver_datas('278') # 情報工学部(学部生)のデータを取得
+    save_syllabus_driver_datas('337') # 情報工学部(院生)のデータを取得
 
+
+# scholor_code: strのデータをスクレイピングしてDBにセーブする
+def save_syllabus_driver_datas(scholor_code):
+    driver = init_html_state(scholor_code) # 学科コードを選択
     # シラバス一覧の取得
     syllabus_links = driver.find_elements_by_class_name('js-syllabus-show-link')
 

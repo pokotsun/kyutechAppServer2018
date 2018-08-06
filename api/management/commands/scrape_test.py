@@ -5,14 +5,14 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
-from api.management.commands.lib.selenium_scrape import initialize_html_state, get_soup, scrape_syllabus
+from api.management.commands.lib.selenium_scrape import init_html_state, get_soup, scrape_syllabus
 import re
 import random
 
 class Command(BaseCommand):
 
     # python manage.py helpで表示されるメッセージ
-    help = 'Seleniumのテスト'
+    help = 'スクレイピングのテスト'
 
     # # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
@@ -39,13 +39,6 @@ class Command(BaseCommand):
                 table = subject_content_tables[1]
                 tr_list = table.find_all("tr")
                 for (i, tr) in enumerate(tr_list):
-                    # content_list = tr.children
                     print(f"{tr.get_text()}")
-                    # for child in content_list:
-                    #     if i > 0:
-                    #         if child.name == "th":
-                    #             print(f"th: {child.string}")
-                    #         elif child.name == "td":
-                    #             print(f"td: {child.string}")
 
             f.close()
