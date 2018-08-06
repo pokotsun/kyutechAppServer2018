@@ -40,7 +40,7 @@ def init_news():
 
 # シラバス情報の初期化
 def initialize_syllabus():
-    save_syllabus_driver_datas('278') # 情報工学部(学部生)のデータを取得
+    # save_syllabus_driver_datas('278') # 情報工学部(学部生)のデータを取得
     save_syllabus_driver_datas('337') # 情報工学部(院生)のデータを取得
 
 
