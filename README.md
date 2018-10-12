@@ -625,5 +625,16 @@ python 3.6.3, pip 9.0.3が入っている前提ですすめる。
 5. `python manage.py initialize_syllabus`
 を実行し、授業情報を取得する。
 
-
 `python manage.py scrape_news`とたたくことでNewsを最新の状態に更新できる。
+
+## 5. dumpの方法
+
+```
+# データのexport
+$ ./manage.py dumpdata --exclude admin --exclude auth.permission --exclude contenttypes > dump.json
+# データの消去
+$ ./manage.py flush
+# データのimport
+$ ./manage.py loaddata dump.json
+```
+
