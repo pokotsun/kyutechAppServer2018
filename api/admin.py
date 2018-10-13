@@ -32,8 +32,8 @@ class SyllabusAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'school_year_id', 'department_id', "school_yearZ", "departmentZ")
-    list_filter = ['school_year_id', 'department_id']
+    list_display = ('pk', "school_yearZ", "departmentZ")
+    # list_filter = ['school_year_id', 'department_id']
 
 
 class UserScheduleAdmin(admin.ModelAdmin):
