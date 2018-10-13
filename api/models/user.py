@@ -52,17 +52,17 @@ class User(models.Model):
     class Meta:
         verbose_name_plural = 'Users'
 
-    school_year = models.IntegerField(default=SCHOOL_FIRST, choices=SCHOOL_SET)
-    department = models.IntegerField(default=DEPARTMENT_JOHO_TINO, choices=DEPARTMENT_SET)
+    school_year_id = models.IntegerField(default=SCHOOL_FIRST, choices=SCHOOL_SET)
+    department_id = models.IntegerField(default=DEPARTMENT_JOHO_TINO, choices=DEPARTMENT_SET)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     # 各学科に割り当てられたidから学科名を取得する
     def department_name(self):
         try:
-            return next(v for k,v in User.DEPARTMENT_SET if k == self.department)
+            return next(v for k,v in User.DEPARTMENT_SET if k == self.department_id)
         except StopIteration:
             return "情報工学部　情工１類　Ⅰクラス"
 
     def __str__(self):
-        return f"user_id: {self.pk}, {self.school_year}年, {self.department}"
+        return f"user_id: {self.pk}, {self.school_year_id}年, {self.department_id}"
