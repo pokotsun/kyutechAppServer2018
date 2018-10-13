@@ -1,4 +1,6 @@
 from django.db import models
+from api.models.school_year import SchoolYear
+from api.models.department import Department
 import api.const as const
 
 # ユーザーモデル
@@ -52,8 +54,13 @@ class User(models.Model):
     class Meta:
         verbose_name_plural = 'Users'
 
+# この二つを消す
     school_year_id = models.IntegerField(default=SCHOOL_FIRST, choices=SCHOOL_SET)
     department_id = models.IntegerField(default=DEPARTMENT_JOHO_TINO, choices=DEPARTMENT_SET)
+
+    school_yearZ = models.ForeignKey(SchoolYear, null=True, on_delete=models.PROTECT)
+    departmentZ = models.ForeignKey(Department, null=True, on_delete=models.PROTECT)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
