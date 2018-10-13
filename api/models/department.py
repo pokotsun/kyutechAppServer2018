@@ -6,8 +6,8 @@ class Department(models.Model):
         verbose_name_plural = "Departments"
 
     name = models.CharField(max_length=50, default=const.DEPARTMENT_NAME_SET[0][0], choices=const.DEPARTMENT_NAME_SET)
-    unique_code = models.IntegerField(default=const.DEPARTMENT_JOKO11, choices=const.DEPARTMENT_CODE_SET, db_index=True)
+    id = models.IntegerField(choices=const.DEPARTMENT_CODE_SET, db_index=True, primary_key=True)
 
 
     def __str__(self):
-        return f"department_id: {self.pk}, name: {self.name}, unique_code: {self.unique_code}"
+        return f"department_id: {self.id}, name: {self.name}"

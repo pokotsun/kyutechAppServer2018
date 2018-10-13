@@ -37,16 +37,16 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class UserScheduleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
+    list_display = ('id', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
     list_filter = ['day']
 
 
 # NewsHeadingの表示
 class SchoolYearAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'unique_code')
+    list_display = ('id', 'name')
 
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'unique_code')
+    list_display = ('id', 'name')
 
 admin.site.register(NewsHeading, NewsHeadingAdmin)
 admin.site.register(News, NewsAdmin)
