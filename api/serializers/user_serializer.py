@@ -10,10 +10,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('__all__')
 
-    email = serializers.EmailField()
-    content = serializers.CharField(max_length=200)
-    created = serializers.DateTimeField()
-
     def update(self, instance, validated_data):
 
         instance.school_year = SchoolYear.objects.get(unique_code=validated_data["school_year"])
