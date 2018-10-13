@@ -6,8 +6,8 @@ class SchoolYear(models.Model):
         verbose_name_plural = "SchoolYears"
 
     name = models.CharField(max_length=300, default=const.SCHOOL_NAME_SET[0][0], choices=const.SCHOOL_NAME_SET)
-    unique_code = models.IntegerField(default=0, choices=const.SCHOOL_CODE_SET, db_index=True)
+    id = models.IntegerField(default=0, choices=const.SCHOOL_CODE_SET, db_index=True, primary_key=True)
 
 
     def __str__(self):
-        return f"schoolyear_id: {self.pk}, name: {self.name}, unique_code: {self.unique_code}"
+        return f"schoolyear_id: {self.id}, name: {self.name}"

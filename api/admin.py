@@ -32,21 +32,21 @@ class SyllabusAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'school_year_id', 'department_id')
-    list_filter = ['school_year_id', 'department_id']
+    list_display = ('pk', "school_year", "department")
+    # list_filter = ['school_year_id', 'department_id']
 
 
 class UserScheduleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
+    list_display = ('id', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
     list_filter = ['day']
 
 
 # NewsHeadingの表示
 class SchoolYearAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'unique_code')
+    list_display = ('id', 'name')
 
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'unique_code')
+    list_display = ('id', 'name')
 
 admin.site.register(NewsHeading, NewsHeadingAdmin)
 admin.site.register(News, NewsAdmin)
