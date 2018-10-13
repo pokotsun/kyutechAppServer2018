@@ -2,7 +2,6 @@ from django.db import models
 import api.const as const
 
 class SchoolYear(models.Model):
-
     class Meta:
         verbose_name_plural = "SchoolYears"
 

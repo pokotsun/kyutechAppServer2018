@@ -1,11 +1,34 @@
-from api.const import NEWS_HEADING_INFOS, SCRAPE_NEWS_URL, YOKE_CODE
-from api.models import NewsHeading, News, Syllabus
+from api.const import NEWS_HEADING_INFOS, SCRAPE_NEWS_URL, YOKE_CODE, SCHOOL_CODE_SET, SCHOOL_NAME_SET, DEPARTMENT_CODE_SET, DEPARTMENT_NAME_SET
+from api.models import NewsHeading, News, Syllabus, SchoolYear, Department
 from api.management.commands.lib.scrape import scrape_news, go_to_next_news
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from api.management.commands.lib.selenium_scrape import init_html_state, get_soup, scrape_syllabus
+
+
+# SchoolYearの初期化
+def init_school_years():
+    for idx in range(len(SCHOOL_CODE_SET)):
+        school_year = SchoolYear(
+            name = SCHOOL_NAME_SET[idx][0],
+            unique_code = SCHOOL_CODE_SET[idx][0]
+        )
+
+        school_year.save()
+    print("success inserting initialize data of school_year")
+
+def init_departments():
+    for idx in range(len(DEPARTMENT_CODE_SET)):
+        department = Department(
+            name = DEPARTMENT_NAME_SET[idx][0],
+            unique_code = DEPARTMENT_CODE_SET[idx][0]
+        )
+
+        department.save()
+
+    print("success inserting initalize data of department")
 
 # NewsHeadingのデータを初期化する
 def init_news_heading():
