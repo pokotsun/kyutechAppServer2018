@@ -118,3 +118,100 @@ NEWS_HEADING_INFOS = [
         "init_url": "db.cgi?page=DBRecord&did=370&qid=all&vid=24&rid=2&Head=&hid=&sid=n&rev=0&ssid=1-3093-5278-g72"
     },
 ]
+
+# school_yearの静的な値
+SCHOOL_NAME_SET = (
+    ("学部1年", "学部1年"),
+    ("学部2年", "学部2年"),
+    ("学部3年", "学部3年"),
+    ("学部4年", "学部4年"),
+    ("修士1年", "修士1年"),
+    ("修士2年", "修士2年"),
+)
+
+
+SCHOOL_CODE_SET = (
+    (0, "学部1年"),
+    (1, "学部2年"),
+    (2, "学部3年"),
+    (3, "学部4年"),
+    (4, "修士1年"),
+    (5, "修士2年"),
+)
+
+
+#departmentのnameの静的な値
+DEPARTMENT_NAME_SET = (
+    ("情報工学部　情工１類　Ⅰクラス", "情報工学部　情工１類　Ⅰクラス"),
+    ("情報工学部　情工１類　Ⅱクラス", "情報工学部　情工１類　Ⅱクラス"),
+    ("情報工学部　情工２類　Ⅲクラス", "情報工学部　情工２類　Ⅲクラス"),
+    ("情報工学部　情工３類　Ⅳクラス", "情報工学部　情工３類　Ⅳクラス"),
+    ("情報工学部　情工３類　Ⅴクラス", "情報工学部　情工３類　Ⅴクラス"),
+    ("情報工学部　知能情報工学科", "情報工学部　知能情報工学科"),
+    ("情報工学部　知能情報工学科　知能情報工学科（編入）", "情報工学部　知能情報工学科　知能情報工学科（編入）"),
+    ("情報工学部　電子情報工学科", "情報工学部　電子情報工学科"),
+    ("情報工学部　電子情報工学科　電子情報工学科（編入）", "情報工学部　電子情報工学科　電子情報工学科（編入）"),
+    ("情報工学部　システム創成情報工学科　システム創成情報工学科", "情報工学部　システム創成情報工学科　システム創成情報工学科"),
+    ("情報工学部　システム創成情報工学科　システム創成情報工学科（編入）", "情報工学部　システム創成情報工学科　システム創成情報工学科（編入）"),
+    ("情報工学部　機械情報工学科　機械情報工学科", "情報工学部　機械情報工学科　機械情報工学科"),
+    ("情報工学部　機械情報工学科　機械情報工学科（編入）", "情報工学部　機械情報工学科　機械情報工学科（編入）"),
+    ("情報工学部　生命情報工学科　生命情報工学科", "情報工学部　生命情報工学科　生命情報工学科"),
+    ("情報工学部　生命情報工学科　生命情報工学科（編入）", "情報工学部　生命情報工学科　生命情報工学科（編入）"),
+    ("大学院情報工学府博士前期課程　情報創成工学専攻　情報創成工学専門分野", "大学院情報工学府博士前期課程　情報創成工学専攻　情報創成工学専門分野"),
+    ("大学院情報工学府博士前期課程　先端情報工学専攻　知能情報工学専門分野", "大学院情報工学府博士前期課程　先端情報工学専攻　知能情報工学専門分野"),
+    ("大学院情報工学府博士前期課程　先端情報工学専攻　電子情報工学専門分野", "大学院情報工学府博士前期課程　先端情報工学専攻　電子情報工学専門分野"),
+    ("大学院情報工学府博士前期課程　学際情報工学専攻　システム創成情報工学専門分野", "大学院情報工学府博士前期課程　学際情報工学専攻　システム創成情報工学専門分野"),
+    ("大学院情報工学府博士前期課程　学際情報工学専攻　生命情報工学専門分野", "大学院情報工学府博士前期課程　学際情報工学専攻　生命情報工学専門分野"),
+    ("大学院情報工学府博士前期課程　学際情報工学専攻　機械情報工学専門分野", "大学院情報工学府博士前期課程　学際情報工学専攻　機械情報工学専門分野"),
+)
+
+
+
+# departmentのunique_codeの静的な値
+DEPARTMENT_JOKO11 = 200
+DEPARTMENT_JOKO12 = 201
+DEPARTMENT_JOKO23 = 202
+DEPARTMENT_JOKO34 = 203
+DEPARTMENT_JOKO35 = 204
+DEPARTMENT_JOHO_CHINO = 205
+DEPARTMENT_JOHO_CHINO_HENNYU = 206
+DEPARTMENT_JOHO_DENSHI = 207
+DEPARTMENT_JOHO_DENSHI_HENNYU = 208
+DEPARTMENT_JOHO_SYSTEM = 209
+DEPARTMENT_JOHO_SYSTEM_HENNYU = 210
+DEPARTMENT_JOHO_KIKAI = 211
+DEPARTMENT_JOHO_KIKAI_HENNYU = 212
+DEPARTMENT_JOHO_SEIMEI = 213
+DEPARTMENT_JOHO_SEIMEI_HENNYU = 214
+DEPARTMENT_JOHO_M_JOHOSOSEI_JOHOSOSEI = 215
+DEPARTMENT_JOHO_M_SENTAN_CHINO = 216
+DEPARTMENT_JOHO_M_SENTAN_DENSHI = 217
+DEPARTMENT_JOHO_M_GAKUSAI_SYSTEM = 218
+DEPARTMENT_JOHO_M_GAKUSAI_SEIMEI = 219
+DEPARTMENT_JOHO_M_GAKUSAI_KIKAI = 220
+
+
+DEPARTMENT_CODE_SET = (
+    (DEPARTMENT_JOKO11, "情報工学部　情工１類　Ⅰクラス"),
+    (DEPARTMENT_JOKO12, "情報工学部　情工１類　Ⅱクラス"),
+    (DEPARTMENT_JOKO23, "情報工学部　情工２類　Ⅲクラス"),
+    (DEPARTMENT_JOKO34, "情報工学部　情工３類　Ⅳクラス"),
+    (DEPARTMENT_JOKO35, "情報工学部　情工３類　Ⅴクラス"),
+    (DEPARTMENT_JOHO_CHINO, "情報工学部　知能情報工学科"),
+    (DEPARTMENT_JOHO_CHINO_HENNYU, "情報工学部　知能情報工学科　知能情報工学科（編入）"),
+    (DEPARTMENT_JOHO_DENSHI, "情報工学部　電子情報工学科"),
+    (DEPARTMENT_JOHO_DENSHI_HENNYU, "情報工学部　電子情報工学科　電子情報工学科（編入）"),
+    (DEPARTMENT_JOHO_SYSTEM, "情報工学部　システム創成情報工学科　システム創成情報工学科"),
+    (DEPARTMENT_JOHO_SYSTEM_HENNYU, "情報工学部　システム創成情報工学科　システム創成情報工学科（編入）"),
+    (DEPARTMENT_JOHO_KIKAI, "情報工学部　機械情報工学科　機械情報工学科"),
+    (DEPARTMENT_JOHO_KIKAI_HENNYU, "情報工学部　機械情報工学科　機械情報工学科（編入）"),
+    (DEPARTMENT_JOHO_SEIMEI, "情報工学部　生命情報工学科　生命情報工学科"),
+    (DEPARTMENT_JOHO_SEIMEI_HENNYU, "情報工学部　生命情報工学科　生命情報工学科（編入）"),
+    (DEPARTMENT_JOHO_M_JOHOSOSEI_JOHOSOSEI, "大学院情報工学府博士前期課程　情報創成工学専攻　情報創成工学専門分野"),
+    (DEPARTMENT_JOHO_M_SENTAN_CHINO, "大学院情報工学府博士前期課程　先端情報工学専攻　知能情報工学専門分野"),
+    (DEPARTMENT_JOHO_M_SENTAN_DENSHI, "大学院情報工学府博士前期課程　先端情報工学専攻　電子情報工学専門分野"),
+    (DEPARTMENT_JOHO_M_GAKUSAI_SYSTEM, "大学院情報工学府博士前期課程　学際情報工学専攻　システム創成情報工学専門分野"),
+    (DEPARTMENT_JOHO_M_GAKUSAI_SEIMEI, "大学院情報工学府博士前期課程　学際情報工学専攻　生命情報工学専門分野"),
+    (DEPARTMENT_JOHO_M_GAKUSAI_KIKAI, "大学院情報工学府博士前期課程　学際情報工学専攻　機械情報工学専門分野"),
+)
+
