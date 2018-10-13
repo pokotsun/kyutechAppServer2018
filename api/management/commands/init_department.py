@@ -15,7 +15,5 @@ class Command(BaseCommand):
 
     # # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
-        # syllabuses = Syllabus.objects.all()
-        # syllabuses.delete()
         init_departments()
  
