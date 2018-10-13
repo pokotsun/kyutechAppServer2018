@@ -9,8 +9,8 @@ class User(models.Model):
     class Meta:
         verbose_name_plural = 'Users'
 
-    school_year = models.ForeignKey(SchoolYear, null=True, on_delete=models.PROTECT)
-    department = models.ForeignKey(Department, null=True, on_delete=models.PROTECT)
+    school_year = models.ForeignKey(SchoolYear, on_delete=models.PROTECT)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
