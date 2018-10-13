@@ -19,5 +19,7 @@ build/
 tests/report/
 AboutKyutechApp.*
 static/
+.vscode
+db.sqlite3
 
 /memo*
