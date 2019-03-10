@@ -19,6 +19,7 @@ six = "==1.11.0"
 Django = "==2.0.4"
 gunicorn = "*"
 "psycopg2" = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 pylint = "*"
