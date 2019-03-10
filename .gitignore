@@ -21,6 +21,7 @@ AboutKyutechApp.*
 static/
 .vscode
 db.sqlite3
+Pipfile.lock
 
 /memo*
 
