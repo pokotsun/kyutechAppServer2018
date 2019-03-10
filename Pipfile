@@ -18,7 +18,6 @@ six = "==1.11.0"
 "urllib3" = "==1.23"
 Django = "==2.0.4"
 gunicorn = "*"
-"psycopg2" = "*"
 psycopg2-binary = "*"
 
 [dev-packages]
