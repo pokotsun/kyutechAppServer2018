@@ -11,7 +11,9 @@ from api.models import NewsHeading, News
 # 次のNewsに移動する
 def go_to_next_news(news):
     # htmlをBeautifulSoupで扱う
-    soup = get_soup(f"{SCRAPE_NEWS_URL}{news.url_params}")
+    news_url = f"{SCRAPE_NEWS_URL}{news.url_params}"
+    print(f"Current News Source: {news.id}, {news_url}")
+    soup = get_soup(news_url)
 
     # 次に移動するURLを取得する
     next_tag = soup.find_all(text=re.compile("前へ"))[0].parent
