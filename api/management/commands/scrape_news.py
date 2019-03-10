@@ -12,7 +12,7 @@ class Command(BaseCommand):
     # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
         news_headings = NewsHeading.objects.all()
-
+        
         # NewsHeadingそれぞれに対して属しているNewsを取得していく
         for news_heading in news_headings:
             news = News.get_most_recent_filtered_news(news_heading.news_heading_code)

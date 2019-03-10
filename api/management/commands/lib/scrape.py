@@ -17,13 +17,50 @@ def go_to_next_news(news):
     next_tag = soup.find_all(text=re.compile("前へ"))[0].parent
     next_url_params = next_tag.get("href")
 
-    # 次のNewsへのLink先が存在しなかった場合
+    # 次のURLが正しいかチェック，正しくなければridをインクリメント
+    if not check_exist_info(next_url_params):
+        next_url_params = increment_rid(next_url_params)
+
+    # 次のNewsへのLink先が存在する場合
     if next_url_params is not None:
         sleep(0.5)
         return scrape_news(next_url_params,
             news.news_heading.news_heading_code)
     else: # Newsが最新の状態のためここでログを書いておく
         return None
+
+def increment_rid(url_params):
+    splited = url_params.split("?")
+    head, query_string = splited[0], splited[1]
+    tail = query_string.split("#")[1]
+    param_pairs = list(map(mapping_query, query_string.split("&")))
+    query_string = pair_to_string(param_pairs)
+    return head + query_string + tail
+
+# クエリ文字列をkey, valueのpairの変換し, ridをインクリメントする
+def mapping_query(elem):
+    k, v = elem.split("=")
+    if k == "rid":
+        v == str(int(v) + 1)
+    return k, v
+
+# pairをstringにreduceする
+def pair_to_string(pair):
+    ret = ""
+    for k, v in pair:
+        ret = ret + k + "=" + v
+    return ret
+    
+# 情報が存在するかチェック
+def check_exist_info(url_params):
+    scrape_url = f"{SCRAPE_NEWS_URL}{url_params}"
+    soup = get_soup(scrape_url)
+    page_title = soup.find("head").find("title").string
+    if page_title == "エラー - サイボウズ(R) デヂエ(R)":
+        return False
+    else:
+        return True
+    print(soup)
 
 # スクレイピング先のURLからsoupを取得する
 def get_soup(url):
