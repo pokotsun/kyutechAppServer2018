@@ -17,7 +17,7 @@ class Command(BaseCommand):
         for news_heading in news_headings:
             news = News.get_most_recent_filtered_news(news_heading.news_heading_code)
             while news is not None:
-                news = go_to_next_news(news, news_heading.news_heading_code)
+                news = go_to_next_news(news)
                 if news is not None:
                     news.save()
                 else:

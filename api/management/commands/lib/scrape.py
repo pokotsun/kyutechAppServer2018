@@ -9,17 +9,18 @@ from api.const import SCRAPE_NEWS_URL, YOKE_CODE
 from api.models import NewsHeading, News
 
 # 次のNewsに移動する
-def go_to_next_news(news, code):
+def go_to_next_news(news):
     # htmlをBeautifulSoupで扱う
+    news_heading_code = news.news_heading.news_heading_code
     soup = get_soup(f"{SCRAPE_NEWS_URL}{news.url_params}")
 
     # ページが存在するかチェックする
     if not exists_target_info(soup):
         # データ削除
-        News.get_most_recent_filtered_news(code).delete()
+        News.get_most_recent_filtered_news(news_heading_code).delete()
         # 削除後，再び最新のデータを取得
-        news = News.get_most_recent_filtered_news(code)
-        go_to_next_news(news, code)
+        news = News.get_most_recent_filtered_news(news_heading_code)
+        go_to_next_news(news)
     else:
         # 次に移動するURLを取得する
         next_tag = soup.find_all(text=re.compile("前へ"))[0].parent
@@ -33,13 +34,10 @@ def go_to_next_news(news, code):
         else: # Newsが最新の状態のためここでログを書いておく
             return None
     
-# 情報が存在するかチェック
+# 情報が削除されているかチェック．存在しない場合, DBから最新を削除
 def exists_target_info(soup):
     page_title = soup.find("head").find("title").string
-    if page_title == "エラー - サイボウズ(R) デヂエ(R)":
-        return False
-    else:
-        return True
+    return not page_title == "エラー - サイボウズ(R) デヂエ(R)"
 
 # スクレイピング先のURLからsoupを取得する
 def get_soup(url):
