@@ -20,6 +20,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
     def get_news_heading_code(self, obj):
         return obj.news_heading.news_heading_code
+        
     def get_source_url(self, obj):
         return f"{SCRAPE_NEWS_URL}{obj.url_params}" 
 
