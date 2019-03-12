@@ -11,21 +11,33 @@ from api.models import NewsHeading, News
 # 次のNewsに移動する
 def go_to_next_news(news):
     # htmlをBeautifulSoupで扱う
-    news_url = f"{SCRAPE_NEWS_URL}{news.url_params}"
-    print(f"Current News Source: {news.id}, {news_url}")
-    soup = get_soup(news_url)
+    news_heading_code = news.news_heading.news_heading_code
+    soup = get_soup(f"{SCRAPE_NEWS_URL}{news.url_params}")
 
-    # 次に移動するURLを取得する
-    next_tag = soup.find_all(text=re.compile("前へ"))[0].parent
-    next_url_params = next_tag.get("href")
+    # ページが存在するかチェックする
+    if not exists_target_info(soup):
+        # データ削除
+        News.get_most_recent_filtered_news(news_heading_code).delete()
+        # 削除後，再び最新のデータを取得
+        news = News.get_most_recent_filtered_news(news_heading_code)
+        go_to_next_news(news)
+    else:
+        # 次に移動するURLを取得する
+        next_tag = soup.find_all(text=re.compile("前へ"))[0].parent
+        next_url_params = next_tag.get("href")
 
-    # 次のNewsへのLink先が存在しなかった場合
-    if next_url_params is not None:
-        sleep(0.5)
-        return scrape_news(next_url_params,
-            news.news_heading.news_heading_code)
-    else: # Newsが最新の状態のためここでログを書いておく
-        return None
+        # 次のNewsへのLink先が存在する場合
+        if next_url_params is not None:
+            sleep(0.5)
+            return scrape_news(next_url_params,
+                news.news_heading.news_heading_code)
+        else: # Newsが最新の状態のためここでログを書いておく
+            return None
+    
+# 情報が削除されているかチェック．存在しない場合, DBから最新を削除
+def exists_target_info(soup):
+    page_title = soup.find("head").find("title").string
+    return not page_title == "エラー - サイボウズ(R) デヂエ(R)"
 
 # スクレイピング先のURLからsoupを取得する
 def get_soup(url):
