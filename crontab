@@ -1,1 +1,1 @@
-*/15 * * * * /usr/bin/.pyenv/shims/python /home/ec2-user/kyutechAppServer2018/manage.py scrape_news >> ~/log/cron.log 2>> ~/log/test.log
+*/15 * * * * /home/app-user/.local/share/virtualenvs/kyutechAppServer2018-yIFX9ipV/bin/python /home/app-user/kyutechAppServer2018/manage.py scrape_news >> ~/log/cron.log 2>> ~/log/scrape.log
