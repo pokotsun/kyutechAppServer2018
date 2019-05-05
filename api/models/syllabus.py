@@ -29,7 +29,7 @@ class Syllabus(models.Model):
 
     abstract = models.CharField(max_length=2550)
     positioning = models.CharField(max_length=2550)
-    lecture_content = models.CharField(max_length=3000)
+    lecture_content = models.CharField(max_length=4500)
     lecture_processing = models.CharField(max_length=2550)
     performance_target = models.CharField(max_length=2550)
     valuation_basis = models.CharField(max_length=2550)
