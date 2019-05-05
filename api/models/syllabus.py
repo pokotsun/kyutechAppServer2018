@@ -23,7 +23,7 @@ class Syllabus(models.Model):
     target_school_year = models.CharField(max_length=255)
     target_term = models.CharField(max_length=255)
     class_number = models.IntegerField()
-    target_period = models.CharField(max_length=255)
+    target_period = models.CharField(max_length=255, db_index=True)
     target_place = models.CharField(max_length=255)
     published_date = models.DateTimeField()
 
@@ -39,7 +39,7 @@ class Syllabus(models.Model):
     study_aid_books = models.CharField(max_length=2048, null=True)
     notes = models.CharField(max_length=1024, null=True)
     professor_email = models.CharField(max_length=255, null=True)
-    open_year = models.IntegerField()
+    open_year = models.IntegerField(db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -99,12 +99,18 @@ class Syllabus(models.Model):
             print(f"{label}は指定のラベルではありません。\n value: {value}")
             raise ValueError
 
+    def filter_by_open_year(open_year):
+        return Syllabus.objects.filter(open_year=2019)
+
     # dayとperiodでフィルターしたSyllabusリストを返す day: "mon" ~ "fri", period: "0" ~ "4"
     def filter_by_day_and_period(day_code, period_code):
         day = Syllabus.convert_day(day_code)
         period = Syllabus.convert_period(period_code)
         if day is not None and period is not None:
-            return Syllabus.objects.filter(
+            # return Syllabus.objects.filter(
+            #     target_period__contains=f"{day}{period}"
+            # )
+            return Syllabus.filter_by_open_year(2019).filter(
                 target_period__contains=f"{day}{period}"
             )
         else:
@@ -113,10 +119,11 @@ class Syllabus(models.Model):
     # 学科名でfilter
     def filter_by_department(department_name):
         if department_name is not None:
-            return Syllabus.objects.filter(academic_credit_infos__contains=department_name)
+            return Syllabus.filter_by_open_year(2019).filter(academic_credit_infos__contains=department_name)
+            # return Syllabus.objects.filter(academic_credit_infos__contains=department_name)
         else:
             return None
-
+   
     # dayコードをDB検索用の文字列に変換
     def convert_day(day_code):
         return next(v for k,v in Syllabus._day_list if re.match(k, day_code))
