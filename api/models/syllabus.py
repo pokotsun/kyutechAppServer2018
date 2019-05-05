@@ -39,6 +39,7 @@ class Syllabus(models.Model):
     study_aid_books = models.CharField(max_length=2048, null=True)
     notes = models.CharField(max_length=1024, null=True)
     professor_email = models.CharField(max_length=255, null=True)
+    open_year = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
