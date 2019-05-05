@@ -26,4 +26,5 @@ Pipfile.lock
 /memo*
 
 .vscode
-db.sqlite3
+dump.json
+kyutechServer2018/settings.py
