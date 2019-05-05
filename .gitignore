@@ -26,5 +26,5 @@ Pipfile.lock
 /memo*
 
 .vscode
-dump.json
+dump*.json
 kyutechServer2018/settings.py

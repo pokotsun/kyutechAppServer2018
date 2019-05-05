@@ -21,9 +21,14 @@ def init_html_state(scholor_code):
     driver = webdriver.Chrome(chrome_options=options)
     driver.get(f"{SCRAPE_SYLLABUS_URL}") # ページを開く
     print(driver.title) #=> 九州工業大学シラバス
+
+    syllabus_year_select = driver.find_element_by_id('q_lecture_year_eq') # selectBoxエレメントをidから取得
+    syllabus_year_select = Select(syllabus_year_select) # セレクトボックスを取得
+    syllabus_year_select.select_by_value("2019") # 年度を選択
+
     faculty_select = driver.find_element_by_id('belong_children_faculty') # selectboxエレメントをidから取得
     faculty_select_element = Select(faculty_select) # セレクトボックスを取得
-    faculty_select_element.select_by_value(scholor_code) # 情報工学部を選択
+    faculty_select_element.select_by_value(scholor_code) # 学部を選択
 
     driver.find_element_by_class_name('js-simple-search-btn').click() # 検索ボタンをクリック
     sleep(10) # 検索ボタン結果が反映されるまで待つ
@@ -49,7 +54,7 @@ def _get_table_contents(table_tag):
 
 # シラバスの情報を取っていく
 def scrape_syllabus(soup):
-    syllabus = Syllabus() # モデルの初期化
+    syllabus = Syllabus(open_year=2019) # モデルの初期化, 開講年度の作成
     subject_title = soup.find(class_="syllabus__subject-name")
     syllabus.set_title(subject_title.string)
     print(f"教科名: {subject_title.string}")
