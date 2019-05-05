@@ -63,7 +63,7 @@ class Syllabus(models.Model):
         elif label in "【開講学期】":
             self.target_term = value
         elif label in "【クラス】":
-            self.class_number = int(value)
+            self.class_number = int(value) if value != "　" and value != " " else 0
         elif label in "【曜日・時限】":
             self.target_period = value.replace(" ", "")
         elif label in "【講義室】":

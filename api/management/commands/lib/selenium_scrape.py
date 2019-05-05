@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 import re
+import time
 from api.models import Syllabus
 from api.const import SCRAPE_SYLLABUS_URL
 
@@ -21,10 +22,12 @@ def init_html_state(scholor_code):
     driver = webdriver.Chrome(chrome_options=options)
     driver.get(f"{SCRAPE_SYLLABUS_URL}") # ページを開く
     print(driver.title) #=> 九州工業大学シラバス
+    current_year = time.ctime().split()[-1] # 現在の年度を取得=> 2019
+
 
     syllabus_year_select = driver.find_element_by_id('q_lecture_year_eq') # selectBoxエレメントをidから取得
     syllabus_year_select = Select(syllabus_year_select) # セレクトボックスを取得
-    syllabus_year_select.select_by_value("2019") # 年度を選択
+    syllabus_year_select.select_by_value(current_year) # 年度を選択
 
     faculty_select = driver.find_element_by_id('belong_children_faculty') # selectboxエレメントをidから取得
     faculty_select_element = Select(faculty_select) # セレクトボックスを取得

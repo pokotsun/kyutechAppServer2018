@@ -64,7 +64,7 @@ def init_news():
 # シラバス情報の初期化
 def initialize_syllabus():
     save_syllabus_driver_datas('278') # 情報工学部(学部生)のデータを取得
-    save_syllabus_driver_datas('337') # 情報工学部(院生)のデータを取得
+    # save_syllabus_driver_datas('337') # 情報工学部(院生)のデータを取得
 
 
 # scholor_code: strのデータをスクレイピングしてDBにセーブする
@@ -76,7 +76,7 @@ def save_syllabus_driver_datas(scholor_code):
     print(f"全部で {len(syllabus_links)}個のシラバスがあります")
     for (i, link) in enumerate(syllabus_links):
         link.click() # linkを呼び出す
-        sleep(4)
+        sleep(3)
         soup = get_soup(driver)
         print(f"{i}番目のシラバスを取得しています")
         syllabus = scrape_syllabus(soup)
