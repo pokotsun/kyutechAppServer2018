@@ -27,4 +27,5 @@ Pipfile.lock
 
 .vscode
 dump*.json
+settings.remote.py
 kyutechServer2018/settings.py
