@@ -12,6 +12,7 @@ class UserImpression(models.Model):
     evaluation = models.CharField(max_length=500)
     opinion = models.CharField(max_length=512)
     request_pd = models.CharField(max_length=255)
+    reply = models.CharField(max_length=1024, default="未回答")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -19,4 +20,4 @@ class UserImpression(models.Model):
     def __str__(self):
         return f"timestamp: {self.timestamp}, which_os: {self.which_os}, "\
             + f"evaluation: {self.evaluation}, opinion: {self.opinion}, "\
-            + f"request_pd: {self.request_pd}"
+            + f"request_pd: {self.request_pd}, reply: {self.reply}"
