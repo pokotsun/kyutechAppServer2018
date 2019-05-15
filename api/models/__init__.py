@@ -5,3 +5,4 @@ from api.models.user import User
 from api.models.user_schedule import UserSchedule
 from api.models.school_year import SchoolYear
 from api.models.department import Department
+from api.models.user_impression import UserImpression
