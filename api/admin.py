@@ -3,8 +3,9 @@ from django.contrib import admin
 from .models.news import News
 from .models.news_heading import  NewsHeading
 from .models.syllabus import Syllabus
-from .models import User, UserSchedule, SchoolYear, Department
-# Register your models here.
+from .models import User, UserSchedule, SchoolYear, Department, UserImpression
+
+# Adminページでの表示の仕方を表す
 
 class NewsInline(admin.TabularInline):
     model = News
@@ -35,7 +36,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('pk', "school_year", "department")
     # list_filter = ['school_year_id', 'department_id']
 
-
+# UserScheduleの表示
 class UserScheduleAdmin(admin.ModelAdmin):
     list_display = ('id', 'syllabus', 'day', 'period', 'quarter', 'is_valid')
     list_filter = ['day']
@@ -55,3 +56,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(UserSchedule, UserScheduleAdmin)
 admin.site.register(SchoolYear, SchoolYearAdmin)
 admin.site.register(Department, DepartmentAdmin)
+admin.site.register(UserImpression)

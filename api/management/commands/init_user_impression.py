@@ -8,7 +8,8 @@ from datetime import datetime as dt
 class Command(BaseCommand):
 
     # python manage.py helpで表示されるメッセージ
-    help = 'userImpressionに関するDBの初期化を行う'
+    help = 'userImpressionに関するDBの初期化を行う\n'\
+        + '初期化の時だけ使う'
 
     # コマンドライン引数を指定する(argparseモジュール)
     # この例ではblog_idという名前で取得する
@@ -35,4 +36,4 @@ class Command(BaseCommand):
                 request_pd = row[4]
             )
             print(impression)
-            # impression.save()
+            impression.save()
