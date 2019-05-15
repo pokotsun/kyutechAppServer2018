@@ -7,7 +7,7 @@ class UserImpressionSerializer(serializers.ModelSerializer):
         model = UserImpression
         fields = (
             "id", "timestamp", "which_os", "evaluation", 
-            "opinion", "request_pd",
+            "opinion", "request_pd", "reply"
         )
 
     
