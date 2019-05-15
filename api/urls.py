@@ -5,6 +5,7 @@ from .views.NewsViewSet import NewsViewSet, FilteredNewsViewSet
 from .views.SyllabusViewSet import SyllabusViewSet, FilteredSyllabusViewSet
 from .views.UserViewSet import UserViewSet
 from .views.UserScheduleViewSet import UserScheduleViewSet, FilteredUserScheduleViewSet
+from .views.UserImpressionViewSet import UserImpressionViewSet
 from django.conf.urls import url
 from django.urls import path
 
@@ -22,3 +23,4 @@ router.register(r'syllabuses', SyllabusViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'user-schedules', UserScheduleViewSet)
 router.register(r'news', NewsViewSet)
+router.register(r'user-impressions', UserImpressionViewSet)
