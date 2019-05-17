@@ -1,9 +1,8 @@
 # -- coding: utf-8 --
 from django.core.management.base import BaseCommand, CommandError
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from api.models.user_impression import UserImpression
 from datetime import datetime as dt
+from api.management.commands.lib.google_spread_sheat import get_impression_spread_sheat
 
 class Command(BaseCommand):
 
@@ -18,13 +17,14 @@ class Command(BaseCommand):
 
     # # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
-        scope = ['https://spreadsheets.google.com/feeds',
-                'https://www.googleapis.com/auth/drive']
+        #scope = ['https://spreadsheets.google.com/feeds',
+        #        'https://www.googleapis.com/auth/drive']
 
-        credentials = ServiceAccountCredentials.from_json_keyfile_name('kyutechApp2018-cert.json', scope)
-        gc = gspread.authorize(credentials)
-        # worksheat情報の取得
-        wks = gc.open('九工大アプリ2018アンケートフォーム（回答）').sheet1
+        #credentials = ServiceAccountCredentials.from_json_keyfile_name('kyutechApp2018-cert.json', scope)
+        #gc = gspread.authorize(credentials)
+        ## worksheat情報の取得
+        #wks = gc.open('九工大アプリ2018アンケートフォーム（回答）').sheet1
+        wks = get_impression_spread_sheat()
 
         list_of_lists = wks.get_all_values()[2:]
         for row in list_of_lists:
