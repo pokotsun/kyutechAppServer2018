@@ -6,6 +6,10 @@ SCRAPE_SYLLABUS_URL = "https://edragon-syllabus.jimu.kyutech.ac.jp/guest/syllabu
 # 文を区切るときに使う文字列
 YOKE_CODE = "|%&%|"
 
+# user impression work sheat name
+SPREAD_SHEAT_CERT_JSON = "kyutechApp2018-cert.json"
+USER_IMPRESSION_WORK_SHEAT_NAME = "九工大アプリ2018アンケートフォーム（回答）"
+
 # 初期化時に使う定数群
 # NewsHeadingの初期化用
 NEWS_HEADING_INFOS = [
