@@ -19,6 +19,7 @@ six = "==1.11.0"
 Django = "==2.0.12"
 gunicorn = "*"
 psycopg2-binary = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 pylint = "*"
