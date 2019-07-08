@@ -18,16 +18,12 @@ class Command(BaseCommand):
 
     # # コマンドが実行された時に呼ばれるメソッド
     def handle(self, *args, **options):
-        #scope = ['https://spreadsheets.google.com/feeds',
-        #        'https://www.googleapis.com/auth/drive']
-
-        #credentials = ServiceAccountCredentials.from_json_keyfile_name('kyutechApp2018-cert.json', scope)
-        #gc = gspread.authorize(credentials)
-        ## worksheat情報の取得
-        #wks = gc.open('九工大アプリ2018アンケートフォーム（回答）').sheet1
         wks = get_impression_spread_sheat()
 
         list_of_lists = wks.get_all_values()[2:]
+        last_impression = UserImpression.objects.order_by('timestamp').last() # last inserted data
+        print(f"LAST_INSERTED_IMPRESSION: {last_impression}")
+        jp = pytz.timezone('Asia/Tokyo') # set timezone for naive timezone
         for row in list_of_lists:
             impression = UserImpression(
                 timestamp = dt.strptime(row[0], "%Y/%m/%d %H:%M:%S"),
@@ -36,5 +32,8 @@ class Command(BaseCommand):
                 opinion = row[3],
                 request_pd = row[4]
             )
-            print(impression)
-            #impression.save()
+            impression_timestamp = jp.localize(impression.timestamp)
+            if impression_timestamp > last_impression.timestamp:
+                print(impression)
+                impression.save()
+
