@@ -21,6 +21,7 @@ gunicorn = "*"
 psycopg2-binary = "*"
 django-cors-headers = "*"
 gspread = "*"
+oauth2client = "*"
 
 [dev-packages]
 pylint = "*"
